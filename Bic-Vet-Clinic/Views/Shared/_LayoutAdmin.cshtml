@@ -1,0 +1,914 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <link href="~/faviconc9 .ico" rel="shortcut icon" type="image/x-icon" />
+
+
+    <title>@ViewBag.Title</title>
+
+    @System.Web.Optimization.Styles.Render("~/bundles/LayoutCommoncss")
+    @System.Web.Optimization.Scripts.Render("~/bundles/LayoutJS")
+
+
+
+    <style type="text/css">
+        .dropdown-navbar .msg-body {
+            margin-left: 0;
+        }
+
+        #LoadPosition .active, #LoadCONTROLNO .active, #LoadDept .active {
+            background-color: #AFD8F8;
+        }
+
+        ul #LoadPosition {
+            width: 380px !important;
+        }
+
+        /*.table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+            padding: 2px;
+        }*/
+
+        /*Added by Amol N For Notification*/
+
+        .divNotify {
+            /*height: 150px;*/
+            width: 300px;
+            background: #F2F2F2;
+            bottom: -400px;
+            right: 5px;
+            position: fixed;
+            transition: all 0.8s;
+            padding-top: 20px;
+            border-radius: 5px;
+            vertical-align: top;
+            box-shadow: -2px 5px 3px 1px #e5e5e5;
+        }
+
+        .notification-open {
+            bottom: 0;
+        }
+
+        .notifyClose {
+            position: absolute;
+            top: 0;
+            padding: 5px;
+            width: 100%;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            transition: all 0.8s;
+        }
+
+        a.user-list:hover {
+            text-decoration: none;
+        }
+
+        .clschatBox {
+            right: 19% !important;
+        }
+
+        @@media screen and (-webkit-min-device-pixel-ratio:0) {
+            .clschatBox {
+                right: 17% !important;
+            }
+        }
+
+        .scroll-track.scroll-detached {
+            z-index: 1031 !important;
+        }
+
+        /*code for new color sidebar change by Rohit*/
+
+        .no-skin .nav-list > li {
+            border-color: #5a7288;
+            z-index: 1031;
+        }
+
+        .no-skin .sidebar-shortcuts {
+            background-color: #222a2d;
+            border-color: #5a7288;
+        }
+
+        .no-skin .sidebar-shortcuts-mini {
+            background-color: #222a2d;
+            border-color: #5a7288;
+        }
+
+        .sidebar > .nav-search {
+            position: static;
+            background-color: #222a2d;
+            border-bottom: 1px solid #5a7288;
+            text-align: center;
+            height: 35px;
+            padding-top: 2px;
+        }
+
+        .no-skin .nav-list > li > a {
+            background-color: #3f5161;
+            color: #fff;
+        }
+
+        .no-skin .sidebar.menu-min .nav-list > li > a > .menu-text {
+            background-color: #414b51;
+            -webkit-box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            border-color: #181d1f;
+        }
+
+        .no-skin .sidebar {
+            background-color: #3f5161;
+            border-style: solid;
+            border-color: #ccc;
+            border-width: 0 1px 0 0;
+        }
+
+        .no-skin .nav-list > li .submenu > li > a:hover {
+            color: #4b88b7;
+            background-color: #f1f5f9;
+        }
+
+        .no-skin .sidebar.menu-min .nav-list > li:hover > a {
+            color: #fff;
+        }
+
+            .no-skin .sidebar.menu-min .nav-list > li:hover > a i {
+                color: #337ab7;
+            }
+
+        .no-skin .nav-list > li .submenu > li > a {
+            border-top-color: #5a606a;
+            background-color: #3f5161;
+            color: #fff;
+        }
+
+        .no-skin .nav-list > li:hover > a {
+            background-color: #414b51;
+            color: #4b88b7;
+        }
+
+        .no-skin .nav-list > li .submenu {
+            background-color: #3f5161;
+            border-color: #5a606a;
+        }
+
+        .no-skin .nav-list > li > .submenu li > .submenu > li a {
+            color: #d9dfe6;
+        }
+
+        .no-skin .sidebar.menu-min .nav-list > li > .submenu {
+            background-color: #3f5161;
+            border: 1px solid #181d1f;
+            border-top-color: #5a606a;
+            -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+        }
+
+        .no-skin .nav-list > li:hover > a {
+            background-color: #eef3f7;
+            color: #2e7db4;
+        }
+
+        .no-skin .sidebar-toggle {
+            background-color: #3f5161;
+            border-color: #5a7288;
+        }
+
+        .no-skin .sidebar.menu-min .sidebar-toggle > .ace-icon {
+            border-color: #5a7288;
+        }
+
+        .no-skin .sidebar-toggle > .ace-icon {
+            border-color: #5a7288;
+            color: #fff;
+            background-color: #3f5161;
+        }
+
+        .no-skin .nav-list li > .arrow:before {
+            border-right-color: #5a7288;
+            -moz-border-right-colors: #242a2b;
+        }
+
+        .no-skin .sidebar.menu-min .nav-list > li > .arrow:after {
+            border-right-color: #414b51 !important;
+            -moz-border-right-colors: #414b51 !important;
+        }
+
+        .no-skin .nav-list > li.pull_up > .arrow:after {
+            border-right-color: #5a7288 !important;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .no-skin .nav-list li > .arrow:after {
+            border-right-color: #5a7288;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .c9logo {
+            float: left;
+            width: 100%;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .menu-min .c9logo {
+            display: none;
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .no-skin .nav-list li.hover > .submenu {
+                border-color: #5a7288;
+                z-index: 1031;
+            }
+        }
+
+        .nav-list > li .submenu {
+            line-height: 1.2 !important;
+        }
+
+        .nav-list > li > .submenu li > .submenu > li {
+            line-height: 1.2;
+        }
+
+        /*End code for new color sidebar*/
+
+
+        /*code for Blue color sidebar change by Rohit*/
+
+        .no-skinblue .nav-list > li {
+            border-color: #5a7288;
+            z-index: 1031;
+        }
+
+        .no-skinblue .sidebar-shortcuts {
+            background-color: #222a2d;
+            border-color: #5a7288;
+        }
+
+        .no-skinblue .sidebar-shortcuts-mini {
+            background-color: #222a2d;
+            border-color: #5a7288;
+        }
+
+        .no-skinblue .sidebar > .nav-search {
+            position: static;
+            background-color: #3eacff;
+            border-bottom: 1px solid #fff;
+            text-align: center;
+            height: 35px;
+            padding-top: 2px;
+        }
+
+        .no-skinblue .nav-list > li > a {
+            background-color: #3eacff;
+            color: #fff;
+        }
+
+        .no-skinblue .sidebar.menu-min .nav-list > li > a > .menu-text {
+            background-color: #f8f8f8;
+            -webkit-box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            border-color: #3eacff;
+        }
+
+        .no-skinblue .sidebar {
+            background-color: #3eacff;
+            border-style: solid;
+            border-color: #ccc;
+            border-width: 0 1px 0 0;
+        }
+
+        .no-skinblue .nav-list > li .submenu > li > a:hover {
+            color: #4b88b7;
+            background-color: #e8e8e8;
+        }
+
+        .no-skinblue .sidebar.menu-min .nav-list > li:hover > a {
+            color: #3eacff;
+        }
+
+            .no-skinblue .sidebar.menu-min .nav-list > li:hover > a i {
+                color: #fff;
+            }
+
+        .no-skinblue .nav-list > li .submenu > li > a {
+            border-top-color: #5a606a;
+            background-color: #f8f8f8;
+            color: #585858;
+        }
+
+        .no-skinblue .nav-list > li:hover > a {
+            background-color: #414b51;
+            color: #4b88b7;
+        }
+
+        .no-skinblue .nav-list > li .submenu {
+            background-color: #f8f8f8;
+            border-color: #5a606a;
+        }
+
+        .no-skinblue .nav-list > li > .submenu li > .submenu > li a {
+            color: #585858;
+        }
+
+        .no-skinblue .sidebar.menu-min .nav-list > li > .submenu {
+            background-color: #f8f8f8;
+            border: 1px solid #181d1f;
+            border-top-color: #5a606a;
+            -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+        }
+
+        .no-skinblue .nav-list > li:hover > a {
+            background-color: #88ccff;
+            color: #2e7db4;
+        }
+
+        .no-skinblue .sidebar-toggle {
+            background-color: #3eacff;
+            border-color: #fff;
+        }
+
+        .no-skinblue .sidebar.menu-min .sidebar-toggle > .ace-icon {
+            border-color: #5a7288;
+        }
+
+        .no-skinblue .sidebar-toggle > .ace-icon {
+            border-color: #fff;
+            color: #3eacff;
+            background-color: #f5f5f5;
+        }
+
+        .no-skinblue .nav-list li > .arrow:before {
+            border-right-color: #5a7288;
+            -moz-border-right-colors: #242a2b;
+        }
+
+        .no-skinblue .sidebar.menu-min .nav-list > li > .arrow:after {
+            border-right-color: #585858 !important;
+            -moz-border-right-colors: #585858 !important;
+        }
+
+        .no-skinblue .nav-list > li.pull_up > .arrow:after {
+            border-right-color: #5a7288 !important;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .no-skinblue .nav-list li > .arrow:after {
+            border-right-color: #585858;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .c9logo {
+            float: left;
+            width: 100%;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .menu-min .c9logo {
+            display: none;
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .no-skinblue .nav-list li.hover > .submenu {
+                border-color: #585858;
+                z-index: 1031;
+            }
+        }
+
+        .nav-list > li .submenu {
+            line-height: 1.2 !important;
+        }
+
+        .nav-list > li > .submenu li > .submenu > li {
+            line-height: 1.2;
+        }
+
+        /*End code for Blue color sidebar*/
+
+        /*code for purple color sidebar change by Rohit*/
+
+        .no-skinpurple .nav-list > li {
+            border-color: #fff;
+            z-index: 1031;
+        }
+
+        .no-skinpurple .sidebar-shortcuts {
+            background-color: #222a2d;
+            border-color: #AC68CC;
+        }
+
+        .no-skinpurple .sidebar-shortcuts-mini {
+            background-color: #222a2d;
+            border-color: #AC68CC;
+        }
+
+        .no-skinpurple .sidebar > .nav-search {
+            position: static;
+            background-color: #AC68CC;
+            border-bottom: 1px solid #fff;
+            text-align: center;
+            height: 35px;
+            padding-top: 2px;
+        }
+
+        .no-skinpurple .nav-list > li > a {
+            background-color: #AC68CC;
+            color: #fff;
+        }
+
+        .no-skinpurple .sidebar.menu-min .nav-list > li > a > .menu-text {
+            background-color: #f8f8f8;
+            -webkit-box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            border-color: #AC68CC;
+        }
+
+        .no-skinpurple .sidebar {
+            background-color: #AC68CC;
+            border-style: solid;
+            border-color: #ccc;
+            border-width: 0 1px 0 0;
+        }
+
+        .no-skinpurple .nav-list > li .submenu > li > a:hover {
+            color: #AC68CC;
+            background-color: #e8e8e8;
+        }
+
+        .no-skinpurple .sidebar.menu-min .nav-list > li:hover > a {
+            color: #AC68CC;
+        }
+
+            .no-skinpurple .sidebar.menu-min .nav-list > li:hover > a i {
+                color: #fff;
+            }
+
+        .no-skinpurple .nav-list > li .submenu > li > a {
+            border-top-color: #5a606a;
+            background-color: #f8f8f8;
+            color: #585858;
+        }
+
+        .no-skinpurple .nav-list > li:hover > a {
+            background-color: #414b51;
+            color: #4b88b7;
+        }
+
+        .no-skinpurple .nav-list > li .submenu {
+            background-color: #f8f8f8;
+            border-color: #5a606a;
+        }
+
+        .no-skinpurple .nav-list > li > .submenu li > .submenu > li a {
+            color: #585858;
+        }
+
+        .no-skinpurple .sidebar.menu-min .nav-list > li > .submenu {
+            background-color: #f8f8f8;
+            border: 1px solid #181d1f;
+            border-top-color: #5a606a;
+            -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 2px 2px 0 rgba(0,0,0,.1);
+        }
+
+        .no-skinpurple .nav-list > li:hover > a {
+            background-color: #9B4AC2;
+            color: #fff;
+        }
+
+        .no-skinpurple .sidebar-toggle {
+            background-color: #AC68CC;
+            border-color: #fff;
+        }
+
+        .no-skinpurple .sidebar.menu-min .sidebar-toggle > .ace-icon {
+            border-color: #AC68CC;
+        }
+
+        .no-skinpurple .sidebar-toggle > .ace-icon {
+            border-color: #fff;
+            color: #AC68CC;
+            background-color: #f5f5f5;
+        }
+
+        .no-skinpurple .nav-list li > .arrow:before {
+            border-right-color: #AC68CC;
+            -moz-border-right-colors: #242a2b;
+        }
+
+        .no-skinpurple .sidebar.menu-min .nav-list > li > .arrow:after {
+            border-right-color: #585858 !important;
+            -moz-border-right-colors: #585858 !important;
+        }
+
+        .no-skinpurple .nav-list > li.pull_up > .arrow:after {
+            border-right-color: #AC68CC !important;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .no-skinpurple .nav-list li > .arrow:after {
+            border-right-color: #585858;
+            -moz-border-right-colors: #fff;
+            border-width: 10px 10px 10px 0;
+            left: -10px;
+        }
+
+        .c9logo {
+            float: left;
+            width: 100%;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .menu-min .c9logo {
+            display: none;
+        }
+
+        @@media only screen and (min-width: 992px) {
+            .no-skinpurple .nav-list li.hover > .submenu {
+                border-color: #585858;
+                z-index: 1031;
+            }
+        }
+
+        .nav-list > li .submenu {
+            line-height: 1.2 !important;
+        }
+
+        .nav-list > li > .submenu li > .submenu > li {
+            line-height: 1.2;
+        }
+
+        /*End code for purple color sidebar*/
+
+        /*Search text box added loading spinner in menu list */
+        .widget-box-overlay.clsoverlay {
+            z-index: 1032;
+            width: 190px;
+        }
+
+        .menu-min .widget-box-overlay.clsoverlay {
+            z-index: 1032;
+            width: 43px;
+        }
+
+        .searchtxt-input {
+            z-index: 1033;
+        }
+    </style>
+    <link href="~/assets/css/ERPDesign.css" rel="stylesheet" />
+</head>
+@{
+    string strSkinClass = System.Configuration.ConfigurationManager.AppSettings["ThemeSkinClass"] == null ? "no-skin" : System.Configuration.ConfigurationManager.AppSettings["ThemeSkinClass"].ToString();
+}
+<body class="@strSkinClass" ondrag="return false;" ondrop="return false;">
+    <div id="navbar" class="navbar navbar-default" style="background-color: @System.Configuration.ConfigurationManager.AppSettings["ThemeColor"];">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+        @{
+            DataModel.LoginModel.LoginSessionDetails SessLogObj = new DataModel.LoginModel.LoginSessionDetails();
+            SessLogObj = (DataModel.LoginModel.LoginSessionDetails)Session["SessionInformation"];
+        }
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- /section:basics/sidebar.mobile.toggle -->
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="#" class="navbar-brand no-padding">
+                    @*<img src="~/Content/Images/applogotrans.png" />*@
+                </a>
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+                    <li class="purple2">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle" title="" style="">
+                            <img class="nav-user-photo" src="~/Content/Images/avatar2.png" alt="@SessLogObj.objLoginM.userName" />
+
+                            <span class="user-info">
+                                <small>Welcome,</small>@SessLogObj.objLoginM.userName
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="/Account/DefLogOff">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <!-- /section:basics/navbar.layout -->
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <!-- #section:basics/sidebar -->
+        @if (System.Configuration.ConfigurationManager.AppSettings["HideSidebar"] == "0")
+        {
+            <div id="sidebar" class="sidebar responsiv">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'fixed')
+                    } catch (e) { }
+                </script>
+                @{
+                    string HideMenuGroupStrip = System.Configuration.ConfigurationManager.AppSettings["HideMenuGroupStrip"] == null ? "0" : System.Configuration.ConfigurationManager.AppSettings["HideMenuGroupStrip"].ToString();
+                    if (HideMenuGroupStrip == "0")
+                    {
+                        <div class="sidebar-shortcuts hide" id="sidebar-shortcuts">
+
+                            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                                <a id="tooltip4" data-placement="bottom" data-rel="tooltip" data-original-title="Dashboard" class="btn btn-success" href='#'>
+                                    <i class="ace-icon fa fa-dashboard"></i>
+                                </a>
+
+                                <a id="tooltip1" data-placement="bottom" data-rel="tooltip" data-original-title="Home" class="btn btn-info" href='@(Url.Action("Index", "Home"))'>
+                                    <i class="ace-icon fa fa-home"></i>
+                                </a>
+
+                                <!-- #section:basics/sidebar.layout.shortcuts -->
+                                <a id="tooltip2" data-placement="bottom" data-rel="tooltip" data-original-title="Report" class="btn btn-warning" href='#'>
+                                    @*href='@(Url.Action("Index", "BI", new { Id = "507" }))'*@
+                                    <i class="ace-icon fa fa-signal"></i>
+                                </a>
+
+                                <a id="tooltip3" data-placement="bottom" data-rel="tooltip" data-original-title="Master" class="btn btn-danger" href='#'>
+                                    <i class="ace-icon fa fa-th"></i>
+                                </a>
+
+                                <!-- /section:basics/sidebar.layout.shortcuts -->
+                            </div>
+
+                            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                                <span class="btn btn-success"></span>
+                                <span class="btn btn-info"></span>
+                                <span class="btn btn-warning"></span>
+                                <span class="btn btn-danger"></span>
+                            </div>
+                        </div>
+                    }
+                }
+                <!-- /.sidebar-shortcuts -->
+                <div id="nav-search" class="nav-search hide">
+                    <form class="form-search">
+                        <span class="input-icon align-left searchtxt-input">
+                            <input type="text" autocomplete="off" id="searchtxt" class="nav-search-input " placeholder="Search">
+                            <ul class="typeahead dropdown-menu" style="top: 28px; left: 0px; display: none;">
+                                <li data-value="South Carolina" class="active"><a href="#"><strong>S</strong>outh Carolina</a></li>
+                                <li data-value="South Dakota" class=""><a href="#"><strong>S</strong>outh Dakota</a></li>
+                                <li data-value="Alaska" class=""><a href="#">Ala<strong>s</strong>ka</a></li>
+                                <li data-value="Arkansas" class=""><a href="#">Arkan<strong>s</strong>a<strong>s</strong></a></li>
+                                <li data-value="Illinois" class=""><a href="#">Illinoi<strong>s</strong></a></li>
+                                <li data-value="Kansas"><a href="#">Kan<strong>s</strong>a<strong>s</strong></a></li>
+                                <li data-value="Louisiana"><a href="#">Loui<strong>s</strong>iana</a></li>
+                                <li data-value="Massachusetts"><a href="#">Ma<strong>s</strong><strong>s</strong>achu<strong>s</strong>ett<strong>s</strong></a></li>
+                            </ul>
+                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                        @{
+                            string ShowHomePage = System.Configuration.ConfigurationManager.AppSettings["HomePage"] == null ? "0" : System.Configuration.ConfigurationManager.AppSettings["HomePage"].ToString();
+                        }
+                        @if (ShowHomePage == "1")
+                        {
+                            <a id="IdHomePage" href="@(Url.Action("Index", "Home"))" style="color:black;">
+                                <i class="fa fa-home bigger-150" style="cursor:pointer;"></i>
+                            </a>
+                        }
+                    </form>
+                </div>
+                <div id="DivwaitingLayout" class="hide widget-box-overlay clsoverlay">
+                    <div class="center">
+                        <i class="fa-spinner fa fa-spin orange bigger-250" style="margin-top:20%"></i>
+                    </div>
+                </div>
+                <div id="menu" class="hide">
+                    @*Code for loading menus*@
+                    @*@Html.Action("Menu", "Home", new { id = 0 })*@
+                </div>
+                <!-- /.nav-list -->
+                <!-- #section:basics/sidebar.layout.minimize -->
+                <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                </div>
+                <!-- /section:basics/sidebar.layout.minimize -->
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'collapsed')
+                    }
+                    catch (e) { }
+
+                    $("#sidebar-collapse").click(function () {
+                        $("#IdHomePage").toggleClass('hide');
+                    });
+                </script>
+            </div>
+        }
+        <!-- /section:basics/sidebar -->
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="breadcrumbs no-margin no-padding-right" id="newBread">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    @if (System.Configuration.ConfigurationManager.AppSettings["ThemeColor"] != "")
+                    {
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $("#newBread ul li h4").removeClass('purple');
+                                $("#newBread ul li h4").css('color', '@System.Configuration.ConfigurationManager.AppSettings["ThemeColor"] !important');
+                            });
+                        </script>
+                    }
+                    <ul class="breadcrumb menu-name">
+                        <li>
+                            <h4 class="purple" style="text-shadow : 1px 1px 1px rgb(213, 213, 213);" id="Menutext"></h4>
+                        </li>
+                    </ul>
+                </div>
+
+                @*style="background-color: @System.Configuration.ConfigurationManager.AppSettings["ThemeColor"];"*@
+                <!-- /section:basics/content.breadcrumbs -->
+                <div id="page-content" class="page-content">
+                    <div class="row">
+                        @*Main body for rendering views*@
+                        @RenderBody()
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span>
+                        <a href="https://www.bicsolutionsltd.com/" target="_blank"><span class="blue bolder ">B.I.C Solutions Ltd.</span></a>
+                        Your partner to your complete business solution.&copy; 2019-2020
+                    </span>
+
+                    &nbsp; &nbsp;
+                    <span class="action-buttons">
+
+                        <a href="https://www.facebook.com/bicsolutionsltd" target="_blank">
+                            <i class="ace-icon fa fa-facebook-square light-blue bigger-150"></i>
+                        </a>
+
+                        <a href="https://www.linkedin.com/company/bicsolutionsltd" target="_blank">
+                            <i class="ace-icon fa fa-linkedin-square light-blue bigger-150"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+
+        @*Chat Model added by archana*@
+        <div id="right-menu" class="modal aside aside-right aside-vc aside-fixed navbar-offset aside-hidden no-backdrop" data-backdrop="false" data-body-scroll="false" data-offset="true" data-placement="right" data-fixed="true" @* tabindex="-1" *@ style="display: block; position: fixed; padding-right: 17px;">
+            <div class="modal-dialog">
+                <div class="modal-content ace-scroll" style="background-color:white;">
+                    @*<div class="scroll-track scroll-dark no-track idle-hide scroll-active" style="display: block; height: 303px;"><div class="scroll-bar" style="height: 85px; top: 0px;"></div></div><div class="scroll-content" style="max-height: 303px;">*@
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span class="white">×</span>
+                            </button>
+                            Online Users
+                        </div>
+                    </div>
+                    <div id="ModalOLUser" class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-dialog  -->
+        <div class="panel panel-default pull-right no-padding no-margin chatdv" style="position:fixed;bottom:0;right:16%;z-index:999;width:240px;">
+
+        </div>
+        <div id="DivwaitingCommonInfoPartial" class="hide widget-box-overlay">
+            <div class="center">
+                <i class="fa-spinner fa fa-spin orange bigger-250" style="margin-top:20%"></i>
+            </div>
+        </div>
+        @*Common Info Partial -- start*@
+        <div id="divCommonInfoPartial" tabindex="-1" class="modal fade" role="dialog" aria-labelledby="divCommonInfoPartialModal" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+            <div id="" class="modal-dialog modal-lg">
+                <div class="modal-content col-sm-12">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="HeaderCommonInfo"></h4>
+                    </div>
+                    <div id="DivLoadCommonInfo" class="modal-body row no-padding">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Common Info Partial -- end*@
+    </div>
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+
+
+        (function ($) {
+
+            $("#sidebar-collapse").click();
+            $("#sidebar-collapse").addClass('hide');
+            //Chat sidebar
+            $('.aside').ace_aside({
+                placement: 'right',
+                offset: true,
+                background: true,
+                body_scroll: false
+            });
+
+
+
+            if ('@TempData["RESULTID"]' != null && '@TempData["RESULTID"]' != "") {
+                var data = '@TempData["MESSAGE"]';
+
+                $.c9Message('@TempData["MESSAGE"]', '@TempData["TITLE"]', '@TempData["TYPE"]');
+            }
+
+            $('#searchtxt').typeahead({
+                ajax: {
+                    url: '/Home/menusearch?term=',
+                    triggerLength: 1,
+                    preDispatch: function (qry) {
+                        return { term: qry };
+                    }
+                },
+                display: 'value',
+                val: 'url',
+                itemSelected: function (item, ele) {
+                    var i = ele.indexOf("/LookUp/LookupResult");
+                    //debugger; This code for loading spinner   by MAksud 14Jan2019
+                    $('#DivwaitingLayout').removeClass('hide');
+                    // $('#DivwaitingLayout').addClass('hide');
+                    window.location.href = ele;
+                }
+            });
+
+
+            //this fun call for validate input copy-paste value for filed like c9-type="numeric"
+            $.c9CheckInputType();
+
+
+        }(jQuery));
+
+
+
+        function RemoveSelectWarning(id) {
+            $('#s2id_' + id).find('.select2-choice').removeClass('clsShowWarning');
+        }
+        function RemoveSelectError(id) {
+            $('#s2id_' + id).find('.select2-choice').removeClass('clsShowError');
+        }
+
+
+
+    </script>
+</body>
+
+
+</html>

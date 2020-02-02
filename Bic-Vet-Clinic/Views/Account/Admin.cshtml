@@ -1,0 +1,57 @@
+﻿@model List<DataModel.Database.dbConfig>
+@{
+    ViewBag.Title = "BIC : Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    ul.breadcrumbFolder {
+        padding: 0px 10px 3px 17px;
+        list-style: none;
+        background-color: #eee;
+    }
+
+        ul.breadcrumbFolder li {
+            display: inline;
+            font-size: 11px;
+        }
+
+            ul.breadcrumbFolder li + li:before {
+                padding: 8px;
+                color: black;
+                content: "/\00a0";
+            }
+
+            ul.breadcrumbFolder li a {
+                color: #0275d8;
+                text-decoration: none;
+            }
+
+                ul.breadcrumbFolder li a:hover {
+                    color: #01447e;
+                    text-decoration: underline;
+                }
+</style>
+@{
+            DataModel.LoginModel.LoginSessionDetails SessLogObj = new DataModel.LoginModel.LoginSessionDetails();
+            SessLogObj = (DataModel.LoginModel.LoginSessionDetails)Session["SessionInformation"];
+}
+<ul style="list-style:none;float:left;margin-left:0 !important;">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="div-3 clsLi">
+                <a type="button" href="/Account/Login/@item.DbConfigId" data-urltype="" data-formtitle="" class="Menubtn width-100 anchorOnclick" title="@item.DbName" data-indexid="0">
+                    <img src="~/Content/Images/dataset.png" width="100" />
+                </a>
+                <div class="btnwrapper hide">
+                    <div class="pull-right editdel"><i style="vertical-align: top; cursor:pointer;color:#777;" title="Delete Page Sheet" class="fa fa-trash-o popover-tooltip no-padding red" onclick="FolderDeleteButtonClick(@item.DbName,@item.DbConfigId)"></i></div>
+                    <div class="pull-right editdel" style="right:15px;"><i style="vertical-align: top; cursor:pointer;color:#777;" title="Edit Page Sheet" class="fa fa-pencil clsUnPin blue" onclick="FolderEdit(@item.DbName)"></i></div>
+                </div>
+            </div>
+
+            <p class="thumbniltitle center" title="@item.DbName">@item.DbName</p>
+
+        </li>
+    }
+</ul>

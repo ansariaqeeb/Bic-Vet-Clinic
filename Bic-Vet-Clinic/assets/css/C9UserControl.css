@@ -1,0 +1,42 @@
+﻿ #c9ItemCodeCntrl {
+        border: 1px solid #d5d5d5;
+        background: #fff;
+        margin: 0px;
+        padding: 0px;
+        font-family: 'Helvetica Neue'; 
+    }
+
+    .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
+        background-color: #438eb9 !important;
+        color: #fff;
+    }
+
+    .ui-jqgrid .ui-jqgrid-htable th div {
+       /*height: 12px;*/
+        padding-right: 4px;
+        padding-top: 2px;
+        /*position: relative;*/
+        vertical-align: text-top;
+        text-align: center;
+    }
+
+    .ui-jqgrid .ui-jqgrid-hdiv {
+        height: 25px;
+    }
+
+    .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
+        padding: 2px !important;
+    }
+
+    #jqgh_grid-table_cb {
+        padding-bottom: 40px;
+    } 
+
+.ui-jqgrid tr.ui-row-ltr td {
+    border-right-color: #efefef !important;
+}
+
+.ui-jqgrid tr.jqgrow td {
+    border-bottom-color: #efefef !important;
+ 
+}

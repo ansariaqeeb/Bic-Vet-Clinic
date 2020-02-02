@@ -1,0 +1,57 @@
+﻿<ul class="nav nav-list" style="top: 0px;">
+    <li class="hover">
+        <a href="#">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text">
+               Dashboard
+                <span class="badge badge-transparent tooltip-error" title="" data-original-title="2 Important Events">
+                </span>
+            </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+    <li class="hover">
+        <a href="#">
+            <i class="menu-icon fa fa-calendar"></i>
+            <span class="menu-text">
+                Bookings
+                <span class="badge badge-transparent tooltip-error" title="" data-original-title="2 Important Events">
+                </span>
+            </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+</ul>
+
+
+<script type="text/javascript">
+    (function ($) {
+        onMenuLoad();
+    }(jQuery));
+    function onMenuLoad() {
+        var url = window.location.pathname;
+        $("#sidebar ul li").removeClass('active');
+        $("#breadcrumbs ul").html("");
+        var res = url.substring(1, 8); //Remove this code once all pagename and controller name are updated
+        if (res != 'Default') {
+            $("#sidebar ul").find('li').each(function () {
+                if ($(this).find('a').attr('href') == url) {
+                    if ('@System.Configuration.ConfigurationManager.AppSettings["LeftMenuCollapse"]' != "1") {
+                        $(this).parent().parent().addClass("active open");
+                    }
+                    else {
+                        $(this).parent().parent().children('a').css("color", "#2b7dbc");
+                        $(this).parent().parent().children('a').css("font-weight", "700");
+                    }
+                    $(this).addClass("active");
+                    $("#breadcrumbs ul").append("<li class='active'><a href='#'>" + $(this).parent().parent().find('a:first').text() + "</a></li>");
+
+                    $("#breadcrumbs ul").append("<li class='active'>" + $(this).text() + "</li>");
+
+                }
+            });
+        }
+
+    }
+
+</script>

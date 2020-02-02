@@ -1,0 +1,176 @@
+﻿
+@model DataModel.Master.workingCalendar
+@{
+    Layout = null;
+}
+
+<div class="row">
+    @using (Ajax.BeginForm("AddWorkCalendar", "WorkdayCalendar", null, new AjaxOptions { OnBegin = "", OnComplete = "", OnSuccess = "OnSuccess", OnFailure = "" }, new { @id = "frmAddState" }))
+    {
+        <div class="col-sm-12 col-xs-12">
+            <div class="form-group col-sm-12 col-xs-12">
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-2 col-xs-12 control-label no-padding-right align-left">Year <span class="red clsStar"><sub>*</sub></span></label>
+                    <div class="col-sm-10 col-xs-12">
+                        <input type="text" name="Year" class="col-sm-12 col-xs-12 no-padding clsreq" value="" id="Year">
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-2 col-xs-12 control-label no-padding-right align-left">Work day's </label>
+
+                    <div class="col-sm-10 col-xs-12">
+                        <div class="col-sm-2 col-xs-12">
+                            <input type="hidden" name="TransList[0].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[0].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[0].DayId" id="" value="1" />
+                            <input type="hidden" name="TransList[0].DayName" id="" value="Sunday" />
+                            <input type="hidden" name="TransList[0].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[0].TypeId" id="" value="0" />
+                            <input type="checkbox" name="TransList[0].Working" class="ace chkBox">
+                            <span class="lbl"> Sunday</span>
+                        </div>  
+                        <div class="col-sm-2 col-xs-12"> 
+                            <input type="hidden" name="TransList[1].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[1].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[1].DayId" id="" value="2" />
+                            <input type="hidden" name="TransList[1].DayName" id="" value="Monday" /> 
+                            <input type="hidden" name="TransList[1].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[1].TypeId" id="" value="0" /> 
+                            <input type="checkbox" name="TransList[1].Working" value="false"  class="ace chkBox">
+                            <span class="lbl"> Monday</span>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+
+                            <input type="hidden" name="TransList[2].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[2].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[2].DayId" id="" value="3" />
+                            <input type="hidden" name="TransList[2].DayName" id="" value="Tuesday" />
+                            <input type="hidden" name="TransList[2].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[2].TypeId" id="" value="0" /> 
+                            <input type="checkbox" name="TransList[2].Working" value="false" class="ace chkBox">
+                            <span class="lbl"> Tuesday</span>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+
+                            <input type="hidden" name="TransList[3].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[3].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[3].DayId" id="" value="4" />
+                            <input type="hidden" name="TransList[3].DayName" id="" value="Wednesday" />
+                            <input type="hidden" name="TransList[3].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[3].TypeId" id="" value="0" /> 
+                            <input type="checkbox" name="TransList[3].Working" value="false" class="ace chkBox">
+                            <span class="lbl"> Wednesday</span>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <input type="hidden" name="TransList[4].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[4].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[4].DayId" id="" value="5" />
+                            <input type="hidden" name="TransList[4].DayName" id="" value="Thursday" />
+                            <input type="hidden" name="TransList[4].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[4].TypeId" id="" value="0" />
+                            <input type="checkbox" name="TransList[4].Working" value="false" class="ace chkBox">
+                            <span class="lbl"> Thursday</span>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <input type="hidden" name="TransList[5].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[5].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[5].DayId" id="" value="6" />
+                            <input type="hidden" name="TransList[5].DayName" id="" value="Friday" />
+                            <input type="hidden" name="TransList[5].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[5].TypeId" id="" value="0" />
+                            <input type="checkbox" name="TransList[5].Working" value="false" class="ace chkBox">
+                            <span class="lbl"> Friday</span>
+                        </div>
+                        <div class="col-sm-1 col-xs-12">
+                            <input type="hidden" name="TransList[6].RMID" id="" value="0" />
+                            <input type="hidden" name="TransList[6].TID" id="" value="0" />
+                            <input type="hidden" name="TransList[6].DayId" id="" value="7" />
+                            <input type="hidden" name="TransList[6].DayName" id="" value="Saturday" />
+                            <input type="hidden" name="TransList[6].NoOfShifts" id="" value="0" />
+                            <input type="hidden" name="TransList[6].TypeId" id="" value="0" />
+                            <input type="checkbox" name="TransList[6].Working" value="false" class="ace chkBox">
+                            <span class="lbl"> Saturday</span>
+                        </div>
+                       
+                    </div>
+
+                </div>
+            </div> 
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 col-xs-12 modal-footer" style="text-align:right">
+                <button id="btnSubmit" type="submit" class="btn btn-xs btn-info" onclick="return Validater();">
+                    <i title="Save" style="cursor: pointer; font-style: normal;" class="fa fa-check"></i> Save
+                </button>
+                <button id="btnCancel" data-dismiss="modal" type="button" class="btn btn-danger btn-xs">
+                    <i class="ace-icon fa fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript">
+    //Script for showing success or error message on page
+    function OnSuccess(res) {
+
+        var errid = res.ResultId;
+        var errmsg = res.Message;
+        var TITLE = res.Title;
+        var TYPE = res.Type;
+        if (parseInt(errid) < 0) {
+            $.c9Message(errmsg, TITLE, TYPE);
+        }
+        else {
+            $('#Addpopup_box').modal('hide');
+            $.c9Message(errmsg, TITLE, TYPE);
+        }
+    }
+
+    $(document).ready(function () {
+        setTimeout(function () { $("#Year").select2("focus", "val"); }, 500);
+         
+
+        //Year select2
+        $("#Year").select2({
+            placeholder: "Select Year",
+            allowClear: true,
+            multiple: false,
+            ajax: {
+                url: "/CommonLibrary/_FillControlNo",
+                data: function (term, page) {
+                    return {
+                        CONTROLENO: 0,
+                        DESCRIPTION: term
+                    };
+                },
+                results: function (data) {
+                    return { results: data };
+                }
+            }
+        }).on('change', function () {
+           
+        });
+
+        $(".chkBox").on('click', function () {
+            var value = $(this).is(':checked');
+            $(this).val(value);
+        });
+        
+    });
+
+    //Validation For State Field
+    function Validater() {
+        if ($("#Year").val() == 0 || $("#Year").val() == "") {
+            $.c9Message('Please Select Year', 'Warning', 'W');
+            $("#Year").select2('focus');
+            return false;
+        }  
+    }
+</script>
+
+
+
+
+

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <link href="~/faviconc.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+    <title>@ViewBag.Title</title>
+
+    @System.Web.Optimization.Styles.Render("~/bundles/LayoutCommoncss")
+    @System.Web.Optimization.Scripts.Render("~/bundles/LayoutJS")
+
+
+
+    <style type="text/css">
+        .dropdown-navbar .msg-body {
+            margin-left: 0;
+        }
+
+        #LoadPosition .active, #LoadCONTROLNO .active, #LoadDept .active {
+            background-color: #AFD8F8;
+        }
+
+        ul #LoadPosition {
+            width: 380px !important;
+        }
+
+        .scroll-track.scroll-detached {
+            z-index: 1031 !important;
+        }
+
+        .nav-list > li .submenu {
+            line-height: 1.2 !important;
+        }
+
+        .nav-list > li > .submenu li > .submenu > li {
+            line-height: 1.2;
+        }
+
+        /*End code for purple color sidebar*/
+
+        /*Search text box added loading spinner in menu list */
+        .widget-box-overlay.clsoverlay {
+            z-index: 1032;
+            width: 190px;
+        }
+
+        .menu-min .widget-box-overlay.clsoverlay {
+            z-index: 1032;
+            width: 43px;
+        }
+
+        .searchtxt-input {
+            z-index: 1033;
+        }
+    </style>
+</head>
+
+<body class="skin-2" ondrag="return false;" ondrop="return false;">
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+        @*@{
+            DataModel.LoginModel.LoginSessionDetails SessLogObj = (DataModel.LoginModel.LoginSessionDetails)Session["SessionInformation"];
+        }*@
+        <!-- #section:basics/sidebar -->
+        @if (System.Configuration.ConfigurationManager.AppSettings["HideSidebar"] == "0")
+        {
+            <div id="sidebar" class="sidebar responsive">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'fixed')
+                    } catch (e) { }
+                </script>
+                @{
+                    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                        <div class="sidebar-shortcuts-large " id="sidebar-shortcuts-large">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle" title="" style="">
+                                <img class="nav-user-photo" src="~/Content/Images/avatar2.png" alt="XYZ" />
+                                <span class="user-info">
+                                    <small>Welcome,</small> XYZ@*SessLogObj.objAgent.Name*@
+                                </span>
+                            </a>
+                            <a id="tooltip4" data-placement="bottom" data-rel="tooltip" data-original-title="Log out" class="btn btn-danger btn-bold btn-white" href="/Account/LogOff">
+                                <i class="ace-icon fa fa-power-off"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+                <div id="DivwaitingLayout" class="hide widget-box-overlay clsoverlay">
+                    <div class="center">
+                        <i class="fa-spinner fa fa-spin orange bigger-250" style="margin-top:20%"></i>
+                    </div>
+                </div>
+                <div id="menu">
+                    @*Code for loading menus*@
+                    @Html.Action("Menu", "Home", new { id =1 })
+                </div>
+                <!-- /.nav-list -->
+                <!-- #section:basics/sidebar.layout.minimize -->
+                <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                </div>
+                <div class="space-32"></div>
+                <div class="space-32"></div>
+                <div class="space-32"></div>
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'collapsed')
+                    }
+                    catch (e) { }
+
+                    $("#sidebar-collapse").click(function () {
+                        $("#IdHomePage").toggleClass('hide');
+                    });
+                </script>
+            </div>
+        }
+        <!-- /section:basics/sidebar -->
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="breadcrumbs no-margin no-padding-right" id="newBread">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    @if (System.Configuration.ConfigurationManager.AppSettings["ThemeColor"] != "")
+                    {
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $("#newBread ul li h4").removeClass('purple');
+                                $("#newBread ul li h4").css('color', '@System.Configuration.ConfigurationManager.AppSettings["ThemeColor"] !important');
+                            });
+                        </script>
+                    }
+                    <ul class="breadcrumb menu-name">
+                        <li>
+                            <h4 class="purple" style="text-shadow : 1px 1px 1px rgb(213, 213, 213);" id="Menutext"></h4>
+                        </li>
+                    </ul>
+                </div>
+
+                @*style="background-color: @System.Configuration.ConfigurationManager.AppSettings["ThemeColor"];"*@
+                <!-- /section:basics/content.breadcrumbs -->
+                <div id="page-content" class="page-content">
+                    <div class="row">
+                        @*Main body for rendering views*@
+                        @RenderBody()
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div>
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span>
+                        <a href="https://www.bicsolutionsltd.com/" target="_blank"><span class="blue bolder ">B.I.C Solutions Ltd.</span></a>
+                        Your partner to your complete business solution.&copy; 2019-2020
+                    </span>
+
+                    &nbsp; &nbsp;
+                    <span class="action-buttons">
+
+                        <a href="https://www.facebook.com/bicsolutionsltd" target="_blank">
+                            <i class="ace-icon fa fa-facebook-square light-blue bigger-150"></i>
+                        </a>
+
+                        <a href="https://www.linkedin.com/company/bicsolutionsltd" target="_blank">
+                            <i class="ace-icon fa fa-linkedin-square light-blue bigger-150"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+
+
+        (function ($) {
+            //Chat sidebar
+            $('.aside').ace_aside({
+                placement: 'right',
+                offset: true,
+                background: true,
+                body_scroll: false
+            });
+
+
+
+            if ('@TempData["RESULTID"]' != null && '@TempData["RESULTID"]' != "") {
+                var data = '@TempData["MESSAGE"]';
+                $.c9Message('@TempData["MESSAGE"]', '@TempData["TITLE"]', '@TempData["TYPE"]');
+            }
+            //this fun call for validate input copy-paste value for filed like c9-type="numeric"
+            $.c9CheckInputType();
+        }(jQuery));
+        function RemoveSelectWarning(id) {
+            $('#s2id_' + id).find('.select2-choice').removeClass('clsShowWarning');
+        }
+        function RemoveSelectError(id) {
+            $('#s2id_' + id).find('.select2-choice').removeClass('clsShowError');
+        }
+    </script>
+</body>
+</html>

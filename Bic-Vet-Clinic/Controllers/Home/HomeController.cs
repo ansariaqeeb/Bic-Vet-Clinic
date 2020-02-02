@@ -13,9 +13,9 @@ namespace Bic_Vet_Clinic.Controllers.Home
         }
 
         //Action method for loading menus on layout
-        public ActionResult Menu(int id)
+        public ActionResult Menu(string userGroup)
         {
-            ViewBag.id = id;
+            ViewBag.userGroup = userGroup;
             return PartialView();
         } 
     }

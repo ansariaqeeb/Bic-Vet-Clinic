@@ -58,7 +58,7 @@ namespace BIC_Web_Services.Controllers.Account
                     if (objLogin.DbConfigId > 0)
                     {
                         dbConfig objDb = new dbConfig();
-                        objDb = objDb.getDatabse(objLogin.DbConfigId, "", 0);
+                        objDb = objDb.getDatabse(0,"",0);
                         if (objDb != null && objDb.DbConfigId > 0)
                         {
                             LoginModels obj = new LoginModels();

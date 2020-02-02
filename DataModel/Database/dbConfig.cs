@@ -128,7 +128,6 @@ namespace DataModel.Database
                 {
                     DbConfigId = s.Field<int>("dbConfigId"),
                     DbName = s.Field<string>("dbName"),
-
                     DbServerName = s.Field<string>("dbServerName"),
                     DbDatabaseName = s.Field<string>("dbDatabaseName"),
                     DbUserId = s.Field<string>("dbUserId"),

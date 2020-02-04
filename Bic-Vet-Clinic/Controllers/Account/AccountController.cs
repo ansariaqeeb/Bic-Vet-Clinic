@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Pastel.Evolution;
 using DataModel.Database;
 using System.Web.Security;
+using DataModel.Evolution;
 
 namespace BIC_Web_Services.Controllers.Account
 {
@@ -15,7 +16,7 @@ namespace BIC_Web_Services.Controllers.Account
         LoginSessionDetails SessLogObj = new LoginSessionDetails();
         // GET: Account
         public ActionResult Index()
-        { 
+        {
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace BIC_Web_Services.Controllers.Account
                     if (objLogin.DbConfigId > 0)
                     {
                         dbConfig objDb = new dbConfig();
-                        objDb = objDb.getDatabse(0,"",0);
+                        objDb = objDb.getDatabse(0, "", 0);
                         if (objDb != null && objDb.DbConfigId > 0)
                         {
                             LoginModels obj = new LoginModels();
@@ -69,7 +70,7 @@ namespace BIC_Web_Services.Controllers.Account
                                 int isAdmin = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.AdminGroup + "'");
                                 int isReceptionist = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserReceptionistGroup + "'");
                                 int isDoctor = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserDoctorGroup + "'");
-                                int isCashier = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserCashierGroup+ "'");
+                                int isCashier = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserCashierGroup + "'");
 
                                 if (isAdmin > 0 || isReceptionist > 0 || isDoctor > 0 || isCashier > 0)
                                 {
@@ -289,20 +290,25 @@ namespace BIC_Web_Services.Controllers.Account
         }
 
         //Action to fill itemtype select2
-        public JsonResult _FillDatabase(int dbConfigId, string DESCRIPTION)
+        public JsonResult _FillBranch(int branchId, string description)
         {
             try
             {
                 dbConfig obj = new dbConfig();
+                List<dbConfig> data = obj.getdbList(0,"", 0);
+                string DbConStr = (data != null && data.Count>0) ? data.FirstOrDefault().DbConStr : "";
+                string DbCommonConStr = (data != null && data.Count > 0) ? data.FirstOrDefault().DbCommonConStr : "";
+                string SerialNumber = (data != null && data.Count > 0) ? data.FirstOrDefault().SerialNumber : "";
+                string AuthCode = (data != null && data.Count > 0) ? data.FirstOrDefault().AuthCode : "";
 
-                List<dbConfig> data = obj.getdbList(dbConfigId, DESCRIPTION == null ? "" : DESCRIPTION, 0);
-
-                var dbResult = data != null ? (from row in data
-                                               select new
-                                               {
-                                                   id = row.DbConfigId,
-                                                   text = row.DbDatabaseName + '-' + row.DbName
-                                               }).ToList() : null;
+                EvolutionSDK objEvol = new EvolutionSDK(DbConStr,DbCommonConStr,SerialNumber,AuthCode);
+                List<Branch> branchList = objEvol.branchList("cBranchCode like '%"+description+"%'");
+                var dbResult = branchList != null ? (from row in branchList
+                                                     select new
+                                                     {
+                                                         id = row.ID,
+                                                         text = row.Code + '-' + row.Description
+                                                     }).ToList() : null;
                 return Json(dbResult, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

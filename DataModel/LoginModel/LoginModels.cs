@@ -109,12 +109,20 @@ namespace DataModel.LoginModel
         {
             try
             {
+                //Before login
                 DatabaseContext.Initialise(dbConnectionString, evolutionCommonDBConnectionString, serialNumber, authCode);
+                DataTable branchList = Branch.List("1=1");
+                //Constructor
+                DatabaseContext.Initialise(dbConnectionString, evolutionCommonDBConnectionString, serialNumber, authCode);
+                Branch branch = new Branch("BranchCode");
+                DatabaseContext.SetBranchContext(branch.ID);
+
                 bool valid = Agent.Authenticate(loginId, password);
                 Agent agent = new Agent();
                 if (valid)
                 {
                     agent = Agent.GetByName(loginId);
+                    DatabaseContext.CurrentAgent = agent; //constant
                     return agent;
                 }
                 else

@@ -53,6 +53,7 @@
     <Compile Include="CommonModel\CommonMethods.cs" />
     <Compile Include="Database\dbConfig.cs" />
     <Compile Include="DBXML.cs" />
+    <Compile Include="Evolution\EvolutionSDK.cs" />
     <Compile Include="LoginModel\LoginModels.cs" />
     <Compile Include="LoginModel\LoginSessionDetails.cs" />
     <Compile Include="Master\Account.cs" />

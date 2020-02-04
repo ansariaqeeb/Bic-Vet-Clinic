@@ -83,21 +83,6 @@ namespace DataModel.CommonModel
             DataTable dt = TaxRate.List("");
             return dt;
         }
-
-        public dayType chkserviceDate(DateTime ServiceDate, XElement LOGXML = null)
-        { 
-            Xdoc = DBXML.ST_CHECKDATE_g(ServiceDate, 0, LOGXML);
-            dt = SqlExev2.GetDT(Xdoc, ConStr);
-            dayType dbresult = dt != null ? (from s in dt.AsEnumerable()
-                                             select new dayType
-                                             {
-                                                 ISWEEKEND = s.Field<int>("ISWEEKEND"),
-                                                 ISHOLIDAY = s.Field<int>("ISHOLIDAY"),
-                                                 ISWORKING = s.Field<int>("ISWORKING")
-                                             }).FirstOrDefault() : null;
-            return dbresult;
-        }
-
         public object fillPriceList(string dbConnectionString, string evolutionCommonDBConnectionString, string serialNumber, string authCode)
         {
             DatabaseContext.Initialise(dbConnectionString, evolutionCommonDBConnectionString, serialNumber, authCode);

@@ -176,6 +176,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Pastel.Evolution.dll</HintPath>
     </Reference>
+    <Reference Include="Pastel.Evolution.Common">
+      <HintPath>..\..\..\..\BIC_VetClinic\Pastel.Evolution.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1148,10 +1151,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\CommonLibrary\CommonLibraryController.cs" />
-    <Compile Include="Controllers\HolidayCalendar\HolidayCalendarController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Reports\RenderReportController.cs" />
-    <Compile Include="Controllers\WorkingCalendar\WorkdayCalendarController.cs" />
     <Compile Include="Filters\CustomAuthorizationAttribute.cs" />
     <Compile Include="Filters\CustomExceptionAttribute.cs" />
     <Compile Include="Filters\CustomSessionAttribute.cs" />
@@ -1429,17 +1430,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\HolidayCalendar\Index.cshtml" />
     <Content Include="Views\Account\DefaultLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Account\Admin.cshtml" />
-    <Content Include="Views\HolidayCalendar\HolidayCalendarList.cshtml" />
-    <Content Include="Views\HolidayCalendar\AddHoliday.cshtml" />
-    <Content Include="Views\HolidayCalendar\EditHoliday.cshtml" />
-    <Content Include="Views\WorkdayCalendar\WorkingCalendarList.cshtml" />
-    <Content Include="Views\WorkdayCalendar\Index.cshtml" />
-    <Content Include="Views\WorkdayCalendar\AddWorkCalendar.cshtml" />
-    <Content Include="Views\WorkdayCalendar\EditWorkCalendar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

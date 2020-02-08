@@ -36,41 +36,28 @@ namespace BIC_Web_Services.Controllers.Account
         public ActionResult Login(LoginModels objLogin)
         {
             try
-            {
-                Response.Cookies["RememberMe"].Value = objLogin.rememberMe.ToString();
-                if (objLogin.rememberMe)
-                {
-                    var userencrypt = string.Join(",", objLogin.userName, objLogin.password, objLogin.rememberMe);
-                    Response.Cookies["rem_user"].Expires = DateTime.Now.AddDays(30);
-                    Response.Cookies["rem_user"].Value = objLogin.Encryptdata(userencrypt);
-
-                    Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(30);
-                    Response.Cookies["RememberMe"].Value = objLogin.rememberMe.ToString();
-                }
-                else
-                {
-                    Response.Cookies["rem_user"].Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies["RememberMe"].Expires = DateTime.Now.AddDays(-1);
-                }
-
-
+            {  
                 if (ModelState.IsValid)
                 {
-                    if (objLogin.DbConfigId > 0)
+                    if (objLogin.BranchId > 0)
                     {
                         dbConfig objDb = new dbConfig();
                         objDb = objDb.getDatabse(0, "", 0);
                         if (objDb != null && objDb.DbConfigId > 0)
                         {
-                            LoginModels obj = new LoginModels();
-                            Agent objAgent = obj.validateAget(objLogin.userName, objLogin.password, objDb.DbConStr, objDb.DbCommonConStr, objDb.SerialNumber, objDb.AuthCode);
+                            string DbConStr = objDb != null  ? objDb.DbConStr : "";
+                            string DbCommonConStr = objDb != null  ? objDb.DbCommonConStr : "";
+                            string SerialNumber = objDb != null ? objDb.SerialNumber : "";
+                            string AuthCode = objDb != null ? objDb.AuthCode : "";
+                            EvolutionSDK obj = new EvolutionSDK(DbConStr, DbCommonConStr, SerialNumber, AuthCode);
+                            Agent objAgent = obj.validateAgent(objLogin.userName, objLogin.password);
 
                             if (objAgent != null && objAgent.ID != 0)
                             {
-                                int isAdmin = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.AdminGroup + "'");
-                                int isReceptionist = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserReceptionistGroup + "'");
-                                int isDoctor = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserDoctorGroup + "'");
-                                int isCashier = AgentGroup.Find("idAgentGroups IN (SELECT iGroupID FROM  dbo.[_rtblAgentGroupMembers] WHERE iAgentID = " + Convert.ToString(objAgent.ID) + ") AND cGroupName='" + objDb.UserCashierGroup + "'");
+                                int isAdmin = obj.agentGroupValidate(objAgent.ID, objDb.AdminGroup);
+                                int isReceptionist = obj.agentGroupValidate(objAgent.ID, objDb.UserReceptionistGroup);
+                                int isDoctor = obj.agentGroupValidate(objAgent.ID, objDb.UserDoctorGroup);
+                                int isCashier = obj.agentGroupValidate(objAgent.ID, objDb.UserCashierGroup);
 
                                 if (isAdmin > 0 || isReceptionist > 0 || isDoctor > 0 || isCashier > 0)
                                 {
@@ -78,10 +65,12 @@ namespace BIC_Web_Services.Controllers.Account
                                     objDb.IsReceptionist = isReceptionist > 0 ? true : false;
                                     objDb.IsDoctor = isDoctor > 0 ? true : false;
                                     objDb.IsCashier = isCashier > 0 ? true : false;
+                                    objDb.BranchId = objLogin.BranchId;
 
                                     LoginSessionDetails objLogSession = new LoginSessionDetails();
                                     objLogSession.objDb = objDb;
                                     objLogSession.objAgent = objAgent;
+                                    objLogSession.objLoginM = objLogin;
 
                                     Session["SessionInformation"] = objLogSession;
                                     string time = DateTime.Now.AddMinutes(1).ToString("mm.ss");
@@ -302,7 +291,7 @@ namespace BIC_Web_Services.Controllers.Account
                 string AuthCode = (data != null && data.Count > 0) ? data.FirstOrDefault().AuthCode : "";
 
                 EvolutionSDK objEvol = new EvolutionSDK(DbConStr,DbCommonConStr,SerialNumber,AuthCode);
-                List<Branch> branchList = objEvol.branchList("cBranchCode like '%"+description+"%'");
+                List<Branch> branchList = objEvol.branchList("cBranchCode like '%"+description+ "%' OR cBranchDescription like '%" + description + "%'");
                 var dbResult = branchList != null ? (from row in branchList
                                                      select new
                                                      {

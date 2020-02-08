@@ -12,13 +12,14 @@ namespace Bic_Vet_Clinic.Filters
     {
         void IAuthorizationFilter.OnAuthorization(AuthorizationContext filterContext)
         {
-            LoginModels objLog = new LoginModels();
-            object UserSession = filterContext.RequestContext.HttpContext.Session["SessionInformation"];
-
-            if (UserSession == null || ((LoginSessionDetails)UserSession).objAgent.ID == 0)
+            try
             {
-                try
+                LoginModels objLog = new LoginModels();
+                object UserSession = filterContext.RequestContext.HttpContext.Session["SessionInformation"];
+
+                if (UserSession == null || ((LoginSessionDetails)UserSession).objAgent.ID == 0)
                 {
+
                     if (HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName] != null)
                     {
                         filterContext.HttpContext.Session.RemoveAll();
@@ -32,22 +33,23 @@ namespace Bic_Vet_Clinic.Filters
                         else
                         {
                             UrlHelper h = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                            filterContext.Result = new RedirectResult(h.Action("DefaultLogin", "Account", new { returnUrl = (filterContext.HttpContext.Request).RawUrl }).ToString());
+                            filterContext.Result = new RedirectResult(h.Action("Index", "Home").ToString());
                         }
                     }
                     else
                     {
                         UrlHelper h = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                        filterContext.Result = new RedirectResult(h.Action("DefaultLogin", "Account", new { returnUrl = (filterContext.HttpContext.Request).RawUrl }).ToString());
+                        filterContext.Result = new RedirectResult(h.Action("Login", "Account").ToString());
                     }
-                }
-                catch (Exception ex)
-                {
-                    UrlHelper h = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                    filterContext.Result = new RedirectResult(h.Action("DefaultLogin", "Account", new { returnUrl = (filterContext.HttpContext.Request).RawUrl }).ToString());
                 }
 
             }
+            catch (Exception)
+            {
+                UrlHelper h = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                filterContext.Result = new RedirectResult(h.Action("Login", "Account").ToString());
+            }
+
         }
     }
 }

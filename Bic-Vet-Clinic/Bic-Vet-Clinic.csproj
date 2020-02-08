@@ -1433,6 +1433,7 @@
     <Content Include="Views\Account\DefaultLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Account\Admin.cshtml" />
+    <Content Include="Views\Shared\_DummyLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

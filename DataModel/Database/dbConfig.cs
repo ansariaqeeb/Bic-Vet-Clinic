@@ -44,6 +44,9 @@ namespace DataModel.Database
         bool isReceptionist;
         bool isDoctor;
         bool isCashier;
+        int branchId;
+        string branchCode;
+        string branchDescription;
         
 
         public string IFlag { get => iFlag; set => iFlag = value; }
@@ -76,6 +79,9 @@ namespace DataModel.Database
         public bool IsReceptionist { get => isReceptionist; set => isReceptionist = value; }
         public bool IsDoctor { get => isDoctor; set => isDoctor = value; }
         public bool IsCashier { get => isCashier; set => isCashier = value; }
+        public int BranchId { get => branchId; set => branchId = value; }
+        public string BranchCode { get => branchCode; set => branchCode = value; }
+        public string BranchDescription { get => branchDescription; set => branchDescription = value; }
 
         #endregion
 
@@ -131,15 +137,15 @@ namespace DataModel.Database
                     DbServerName = s.Field<string>("dbServerName"),
                     DbDatabaseName = s.Field<string>("dbDatabaseName"),
                     DbUserId = s.Field<string>("dbUserId"),
-                    DbPassword = s.Field<string>("dbPassword"),
-                    SqlDBAuthType = s.Field<string>("SqlDBAuthType"),
+                    DbPassword = s.Field<string>("dbPassword"), 
                     DbCommServerName = s.Field<string>("dbCommServerName"),
-                    SqlDBCommAuthType = s.Field<string>("SqlDBCommAuthType"),
                     DbCommDatabaseName = s.Field<string>("dbCommDatabaseName"),
                     DbCommUserId = s.Field<string>("dbCommUserId"),
                     DbCommPassword = s.Field<string>("dbCommPassword"),
                     DbConStr = s.Field<string>("dbConStr"),
                     DbCommonConStr = s.Field<string>("dbCommonConStr"),
+                    SerialNumber = s.Field<string>("serialNumber"),
+                    AuthCode = s.Field<string>("authCode"),
                     AdminGroup = s.Field<string>("adminGroup"),
                     UserReceptionistGroup = s.Field<string>("receptionistGroup"),
                     UserDoctorGroup = s.Field<string>("doctorGroup"),

@@ -4752,13 +4752,13 @@ body.mob-safari .sidebar.sidebar-fixed {
   -webkit-transition: none;
 }
 .breadcrumbs {
-  position: relative;
-  z-index: auto;
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #f5f5f5;
-  min-height: 41px;
-  line-height: 40px;
-  padding: 0 12px 0 0;
+    position: relative;
+    z-index: auto;
+    border-bottom: 1px solid #4b9e0c;
+    background-color: #4b9e0c;
+    min-height: 41px;
+    line-height: 40px;
+    padding: 0 12px 0 0;
 }
 .breadcrumb {
   background-color: transparent;

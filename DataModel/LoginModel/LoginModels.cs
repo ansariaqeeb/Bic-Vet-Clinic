@@ -21,11 +21,7 @@ namespace DataModel.LoginModel
         DataTable dt;
          
 
-        #region properties 
-        public int controlNo { get; set; }
-        public int plantId { get; set; }
-        public int compId { get; set; }
-
+        #region properties  
         int dbConfigId;
         bool isAdmin;
         int branchId;
@@ -140,52 +136,6 @@ namespace DataModel.LoginModel
 
         }
 
-        //    /// <summary>
-        //    /// Method to update Logout status in Login Log
-        //    /// </summary> 
-        //    /// <returns>retirns xml with id and message</returns>
-        //    public DataModel.Result.Result LOGOUT(int LOGINLOGID, XElement LOGXML)
-        //    {
-        //        xdoc = DBXML.CORE_LOGOUT_c(LOGINLOGID, LOGXML);
-        //        err.ReadBIErrors(Convert.ToString(SqlExe.GetXml(xdoc)));
-        //        return err;
-        //    }
-
-
-        //    public LoginSessionDetails CHANGEPOSITION(int FLAG, int ORGSTRUCID, string LOGINID, int CONTROLNO, int POSID, XElement LOGXML)
-        //    {
-
-        //        xdoc = DBXML.USERAUTHENTICATION_g(FLAG, LOGINID, "", CONTROLNO, POSID, ORGSTRUCID, "", "", "", "", "", "", "", "");
-
-        //        DataTable dt = SqlExe.GetDT(xdoc);
-
-        //        LoginSessionDetails objLogSession = new LoginSessionDetails();
-
-        //        if (Convert.ToInt32(dt.Rows.Count) > 0)
-        //        {
-        //            string timezone = Convert.ToString(dt.Rows[0]["DIFFFROMGMT"]);
-        //            objLogSession.GMTminutes = Convert.ToInt32(timezone);
-        //            objLogSession.Timezone = timezone + " " + Convert.ToString(dt.Rows[0]["TMZONECODE"]);
-        //            objLogSession.LoginName = dt.Rows[0]["LOGINID"].ToString();
-        //            objLogSession.UserId = Convert.ToInt32(dt.Rows[0]["USERID"].ToString());
-        //            objLogSession.IMGPATH = Convert.ToString(dt.Rows[0]["IMGDESC"]);
-        //            objLogSession.USERNAME = Convert.ToString(dt.Rows[0]["USERNAME"]);
-        //            objLogSession.USERTYPE = Convert.ToInt32(dt.Rows[0]["USERTYPEID"]);
-        //            objLogSession.CONTROLNO = Convert.ToInt32(dt.Rows[0]["CONTROLNO"]);
-        //            objLogSession.FINYEARDESC = Convert.ToString(dt.Rows[0]["FINYEARDESC"]);
-        //            objLogSession.POSID = Convert.ToInt32(dt.Rows[0]["POSID"]);
-        //            objLogSession.POSDESC = Convert.ToString(dt.Rows[0]["POSDESC"]);
-        //            objLogSession.ORGSTRUCID = Convert.ToInt32(dt.Rows[0]["ORGSTRUCID"]);
-        //            objLogSession.ORGDESC = Convert.ToString(dt.Rows[0]["ORGDESC"]);
-        //            objLogSession.ORGPATH = Convert.ToString(dt.Rows[0]["ORGPATH"]);
-        //            objLogSession.SDATE = Convert.ToDateTime(dt.Rows[0]["SDATE"]);
-        //            objLogSession.EDATE = Convert.ToDateTime(dt.Rows[0]["EDATE"]);
-        //            objLogSession.LOGXML = LOGXML;
-        //        }
-
-        //        return objLogSession;
-        //    }
-        //    //Method for decrypting password
         public string Decryptdata(string encryptpwd)
         {
             string decryptpwd = string.Empty;

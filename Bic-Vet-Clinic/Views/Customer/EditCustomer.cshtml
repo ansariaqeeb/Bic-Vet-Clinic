@@ -1,0 +1,91 @@
+﻿@model Pastel.Evolution.Customer
+@{
+    Layout = null;
+}
+
+    <div class="row">
+        @using (Ajax.BeginForm("EditCustomer", "Customer", null, new AjaxOptions { OnBegin = "", OnComplete = "", OnSuccess = "OnSuccess", OnFailure = "" }, new { @id = "frmAddCustomer" }))
+        {
+            <div class="form-group col-sm-12 col-xs-12">
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Customer Name <span class="red clsStar"><sub>*</sub></span></label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="hidden" name="Code" value="@Model.Code" />
+                        <input type="text" autocomplete="off" class="col-sm-12 clsreq" value="@Model.Description" placeholder="Enter Customer Name." name="Description" id="Description">
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">National Id <span class="red clsStar"><sub>*</sub></span></label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" autocomplete="off" class="col-sm-12 clsreq" value="@Model.IDNumber" placeholder="Enter National Id." name="IDNumber" id="IDNumber">
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Telephone</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" autocomplete="off" class="col-sm-12" value="@Model.Telephone" placeholder="Enter Telephone." name="Telephone" id="Telephone">
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 col-xs-12">
+                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Address</label>
+                    <div class="col-sm-8 col-xs-12">
+                        @Html.EditorFor(a => a.Addressee, new { @class = "col-xs-12 col-sm-12", @autocomplete = "off", placeholder = "Enter Address" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12 col-xs-12 modal-footer" style="text-align:right">
+                    <button id="btnSubmit" type="submit" class="btn btn-white  btn-xs btn-info" onclick="return Validater();">
+                        <i title="Save" style="cursor: pointer; font-style: normal;" class="fa fa-check"></i> Save
+                    </button>
+                    <button id="btnCancel" data-dismiss="modal" type="button" class="btn btn-white btn-danger btn-xs">
+                        <i class="ace-icon fa fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript">
+    //Script for showing success or error message on page
+    function OnSuccess(res) {
+
+        var errid = res.ResultId;
+        var errmsg = res.Message;
+        var TITLE = res.Title;
+        var TYPE = res.Type;
+        if (parseInt(errid) < 0) {
+            $.c9Message(errmsg, TITLE, TYPE);
+        }
+        else {
+            $('#Addpopup_box').modal('hide');
+            $.c9Message(errmsg, TITLE, TYPE);
+        }
+    }
+
+    $(document).ready(function () { 
+    });
+
+    //Validation For State Field
+    function Validater() {
+        if ($("#Description").val().trim() == "") {
+            $.c9Message('Please Enter Customer Name', 'Warning', 'W');
+            $("#Description").focus();
+            $("#Description").val("");
+            return false;
+        }
+        else if ($("#IDNumber").val() == "") {
+            $.c9Message('Please Enter National Id', 'Warning', 'W');
+            $("#IDNumber").focus();
+            $("#IDNumber").val("");
+            return false;
+        } 
+    }
+</script>
+
+
+
+
+
+

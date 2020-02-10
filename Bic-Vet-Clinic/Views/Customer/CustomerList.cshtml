@@ -1,0 +1,123 @@
+﻿@model List<Pastel.Evolution.Customer>
+
+
+<input type="hidden" id="hdnPageno" value="@ViewBag.PageNo" />
+<div class="table-width col-sm-12 inner-content-div clsTableHeaderFix" id="divTblCustomer">
+    <table id="tblCustomer" class="table table-striped table-bordered table-condensed" style="font-size:13px;margin:0px 0 10px;">
+        <thead>
+            <tr>
+                <td>Actions</td>
+                <th>Account</th>
+                <th>Name</th>
+                <th>Telephone</th>
+            </tr>
+        </thead>
+        @{
+            int j = 0;
+            if (Model == null || Model.Count() == 0)
+            {
+                <tr class="red">
+                    <td class="red" colspan="20">No data to Display</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="tr_@j">
+                        <td> 
+                            <button class="btn btn-minier btn-white btn-info btn-bold" title="Edit Customer" onclick="loadedit('@item.Code');">
+                                <i class="ace-icon fa fa-pencil bigger-80"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <span>@item.Code</span>
+                        </td>
+                        <td>
+                            <span>@item.Description</span>
+                        </td>
+                        <td>
+                            <span>@item.Telephone</span>
+                        </td>
+
+                    </tr>
+                    j++;
+                }
+            }
+        }
+    </table>
+
+</div>
+<div class="pull-right" style="height:50px;padding-top:0px;">
+    <ul id="pagination" class="pagination-sm"></ul>
+    <div id="Pageing"></div>
+</div>
+
+<script type="text/javascript">
+
+    (function ($) {
+        $('#pagination').twbsPagination({
+            startPage: parseInt(@ViewBag.PageNo),
+            totalPages: parseInt(@ViewBag.totalpages) == 0 ? 1 : parseInt(@ViewBag.totalpages),
+            visiblePages: parseInt(10) == 0 ? 1 : parseInt(10),
+            onPageClick: function (event, page) {
+                loadLookup(page);
+            }
+        });
+
+    }(jQuery));
+
+
+    function loadedit(code) {
+        $('#Divwaitingtr').removeclass('hide');
+        var url = 'Customer/EditCustomer';
+        var data = { code: code }
+        var title = 'Edit Customer';
+
+        $('#ActivityHeader').text(title);
+        $('#Addpopup_box').modal('show');
+
+        $.get("/" + url, data, function (data) {
+            $('#LoadForm').html('');
+            $('#LoadForm').html(data);
+            $('#Divwaitingtr').addclass('hide');
+        });
+    }
+
+
+    //function DeleteHoliday(MID,holidayDate) {
+    //    bootbox.confirm({
+    //        title: 'Confirm delete',
+    //        message: "Are you sure, you want to delete this " + holidayDate + " holiday ?",
+    //        buttons: {
+    //            'confirm': {
+    //                label: 'Confirm',
+    //                className: 'btn-sm btn-info'
+    //            },
+
+    //            'cancel': {
+    //                label: 'Cancel',
+    //                className: 'btn-sm btn-danger'
+    //            },
+    //        },
+    //        callback: function (result) {
+    //            if (result == true) {
+    //                $.get('/HolidayCalendar/DeleteHoliday', { MID: MID }, function (res) {
+
+    //                    var errid = res.ResultId;
+    //                    var errmsg = res.Message;
+    //                    var TITLE = res.Title;
+    //                    var TYPE = res.Type;
+    //                    if (errid > 0) {
+    //                        $.c9Message(errmsg, TITLE, TYPE);
+    //                        loadLookup(1);
+    //                    } else {
+    //                        $.c9Message(errmsg, TITLE, TYPE);
+    //                    }
+
+    //                });
+    //            }
+    //        }
+    //    });
+    //}
+</script>

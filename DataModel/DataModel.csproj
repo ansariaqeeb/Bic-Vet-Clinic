@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="Pastel.Evolution, Version=7.20.0.0, Culture=neutral, PublicKeyToken=86fac4c1500a3756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Pastel.Evolution.dll</HintPath>
+      <HintPath>bin\Pastel.Evolution.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -75,6 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Pastel.Evolution.Common.dll" />
+    <Content Include="bin\Pastel.Evolution.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

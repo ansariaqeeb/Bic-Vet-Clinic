@@ -172,12 +172,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Pastel.Evolution, Version=7.20.0.0, Culture=neutral, PublicKeyToken=86fac4c1500a3756, processorArchitecture=MSIL">
+    <Reference Include="Pastel.Evolution, Version=10.0.0.0, Culture=neutral, PublicKeyToken=35b7016a97a66b46, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Pastel.Evolution.dll</HintPath>
-    </Reference>
-    <Reference Include="Pastel.Evolution.Common">
-      <HintPath>..\..\..\..\BIC_VetClinic\Pastel.Evolution.Common.dll</HintPath>
+      <HintPath>..\DataModel\bin\Pastel.Evolution.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -1151,6 +1148,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\CommonLibrary\CommonLibraryController.cs" />
+    <Compile Include="Controllers\Customer\CustomerController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Reports\RenderReportController.cs" />
     <Compile Include="Filters\CustomAuthorizationAttribute.cs" />
@@ -1434,6 +1432,10 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Account\Admin.cshtml" />
     <Content Include="Views\Shared\_DummyLayout.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\CustomerList.cshtml" />
+    <Content Include="Views\Customer\AddCustomer.cshtml" />
+    <Content Include="Views\Customer\EditCustomer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

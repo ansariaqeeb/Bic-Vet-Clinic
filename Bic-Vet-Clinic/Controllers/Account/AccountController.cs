@@ -51,7 +51,7 @@ namespace BIC_Web_Services.Controllers.Account
                             string AuthCode = objDb != null ? objDb.AuthCode : "";
                             EvolutionSDK obj = new EvolutionSDK(DbConStr, DbCommonConStr, SerialNumber, AuthCode);
                             Agent objAgent = obj.validateAgent(objLogin.userName, objLogin.password);
-
+                            
                             if (objAgent != null && objAgent.ID != 0)
                             {
                                 int isAdmin = obj.agentGroupValidate(objAgent.ID, objDb.AdminGroup);
@@ -302,9 +302,8 @@ namespace BIC_Web_Services.Controllers.Account
             }
             catch (Exception ex)
             {
-                throw ex; ;
+                throw ex;
             }
-
         }
 
     }

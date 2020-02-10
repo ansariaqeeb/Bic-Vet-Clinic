@@ -16,9 +16,9 @@ namespace DataModel.Evolution
             {
                 DatabaseContext.Initialise(dbConnection, evolutionCommonConnection, serialNumber, authCode);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("Error While Processing");
+                throw ex;
             }
         }
         public EvolutionSDK(string dbConnection, string evolutionCommonConnection, string serialNumber, string authCode, int branchId)
@@ -102,5 +102,69 @@ namespace DataModel.Evolution
 
         }
 
+        public List<Customer> customerList(string criteria = "1=1")
+        {
+            try
+            {
+                DataTable customerDt = Customer.List(criteria);
+                customerDt.DefaultView.Sort = "Name";
+                customerDt = customerDt.DefaultView.ToTable();
+                List<Customer> lst = customerDt != null && customerDt.Rows.Count > 0 ? 
+                (from s in customerDt.AsEnumerable()
+                 select new Customer
+                 {
+                     Code = s.Field<string>("Account"),
+                     Description = s.Field<string>("Title") + ". " + s.Field<string>("Name"),
+                     Telephone = s.Field<string>("Telephone"),
+                 }).ToList() : null; 
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            } 
+        }
+        public Customer getCustomer(string code)
+        {
+            try
+            {
+                Customer objCust = new Customer(code);
+                return objCust;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Customer addCustomer(Customer obj)
+        {
+            try
+            {
+                obj.Save();
+                return obj; 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Customer editCustomer(Customer obj)
+        {
+            try
+            {
+                Customer newobj = new Customer(obj.Code);
+                newobj.Description = obj.Description;
+                newobj.IDNumber = obj.IDNumber;
+                newobj.Telephone = obj.Telephone;
+                newobj.Addressee = obj.Addressee;
+
+                newobj.Save();
+                return newobj;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

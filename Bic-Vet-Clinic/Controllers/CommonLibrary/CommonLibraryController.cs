@@ -1,11 +1,7 @@
 ﻿using Bic_Vet_Clinic.Filters;
 using DataModel.LoginModel;
-using DataModel.Master;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
@@ -16,8 +12,6 @@ namespace Bic_Vet_Clinic.Controllers.CommonLibrary
     {
         LoginSessionDetails SessLogObj = new LoginSessionDetails();
         
-        XDocument Xdoc;
-        DataTable Dt;
         // GET: CommonLibrary
         public ActionResult Index()
         {

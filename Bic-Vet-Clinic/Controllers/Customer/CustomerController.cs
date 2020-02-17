@@ -7,6 +7,7 @@ using DataModel.Evolution;
 using DataModel.LoginModel;
 using Bic_Vet_Clinic.Filters;
 using Pastel.Evolution;
+using Pastel.Evolution.Common;
 using DataModel.Result;
 
 namespace Bic_Vet_Clinic.Controllers.Customer

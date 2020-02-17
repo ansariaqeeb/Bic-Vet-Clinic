@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Pastel.Evolution, Version=7.20.0.0, Culture=neutral, PublicKeyToken=86fac4c1500a3756, processorArchitecture=MSIL">
+    <Reference Include="Pastel.Evolution, Version=10.0.0.0, Culture=neutral, PublicKeyToken=35b7016a97a66b46, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Pastel.Evolution.dll</HintPath>
+    </Reference>
+    <Reference Include="Pastel.Evolution.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=35b7016a97a66b46, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Pastel.Evolution.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

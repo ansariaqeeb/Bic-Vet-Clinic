@@ -174,7 +174,11 @@
     </Reference>
     <Reference Include="Pastel.Evolution, Version=10.0.0.0, Culture=neutral, PublicKeyToken=35b7016a97a66b46, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DataModel\bin\Pastel.Evolution.dll</HintPath>
+      <HintPath>bin\Pastel.Evolution.dll</HintPath>
+    </Reference>
+    <Reference Include="Pastel.Evolution.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=35b7016a97a66b46, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Pastel.Evolution.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />

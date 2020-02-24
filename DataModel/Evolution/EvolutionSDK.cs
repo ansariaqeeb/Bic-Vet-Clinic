@@ -101,17 +101,18 @@ namespace DataModel.Evolution
 
         }
 
-        public List<Customer> customerList(string criteria = "1=1")
+        public object customerList(string criteria = "1=1")
         {
             try
             {
                 DataTable customerDt = Customer.List(criteria);
                 customerDt.DefaultView.Sort = "Name";
                 customerDt = customerDt.DefaultView.ToTable();
-                List<Customer> lst = customerDt != null && customerDt.Rows.Count > 0 ? 
+                var lst = customerDt != null && customerDt.Rows.Count > 0 ? 
                 (from s in customerDt.AsEnumerable()
-                 select new Customer
+                 select new
                  {
+                     Button = "<button class='btn btn-minier btn-white btn-info btn-bold' title='Edit Customer' onclick='loadedit('"+ s.Field<string>("Account") + "');'><i class='ace-icon fa fa-pencil bigger-80'></i></button>",
                      Code = s.Field<string>("Account"),
                      Description = s.Field<string>("Title") + ". " + s.Field<string>("Name"),
                      Telephone = s.Field<string>("Telephone"),

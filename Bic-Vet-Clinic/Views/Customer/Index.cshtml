@@ -23,42 +23,25 @@
 <div id="LookUpDiv" class="col-sm-12 col-xs-12 no-padding">
     <div class="tab-content">
         <div id="My" class="tab-pane in active">
-            <div id="MyFilter" style="height: 60px;">
-                <div id="DateFilters" class="widget-box">
-                    <div class="widget-body">
-                        <div class="widget-main row no-margin" style="background-color:#eee;">
-                            <div class="col-sm-12  form-group  no-margin">
-                                <div class="col-sm-4 col-xs-12">
-                                    <input type="text" id="txtSearchHelpTxtbox" class="width-100 input-sm lbl-font" placeholder="Search ..." onkeyup="FilterTblData()">
-                                </div>
-                                <div class="form-group col-sm-4 no-padding ">
-                                    <div class="col-sm-12 col-xs-12">
-                                        <input type="button" id="btnCopyFrom" value="Copy" class="btn btn-sm btn-info btn-white pull-right hide" onload="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div id="DivwaitingCtrlview" style="z-index:1040;position:absolute;top:10%;" class="col-sm-12 col-xs-12 row hide center modal-backdrop fade in">
                 <i class="fa fa-spinner fa fa-spin orange bigger-300 "></i>
             </div>
             <div id="lookupList" class="row no-padding">
+                <table id="CustomerList" class="table table-striped table-bordered table-hover table-condensed width-100"></table>
             </div>
         </div>
     </div>
 </div>
 
 <div id="DivwaitingControl" class="hide widget-box-overlay">
-    <div id=""  style="z-index:1040;position:absolute;top:40%;" class="col-sm-12 col-xs-12 row center">
+    <div id="" style="z-index:1040;position:absolute;top:40%;" class="col-sm-12 col-xs-12 row center">
         <i class="fa fa-spinner fa fa-spin orange bigger-300"></i>
     </div>
 </div>
 <div id="Divwaitingback" class="modal-backdrop fade in hide"></div>
- 
+
 <div id="Addpopup_box" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-    <div class="modal-dialog modal-lg width-40">
+    <div class="modal-dialog modal-lg width-70">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -87,9 +70,9 @@
         $("#newBread").html(htm);
 
         $('#Addpopup_box').on('hidden.bs.modal', function () {
-            loadLookup(1);
+            bindCustomerList("");
         });
-        loadLookup(1);
+        bindCustomerList("");
 
 
         $('#btnAdd').on('click', function () {
@@ -110,43 +93,40 @@
 
     }(jQuery));
 
-    function loadLookup(pageNo) {
-        $('#DivwaitingControl').removeClass('hide');
-        var url = '/Customer/CustomerList';
-        var data = { searchtext: $('#txtSearchHelpTxtbox').val(), PageNo: pageNo }
-        $.get(url, data, function (data) {
-            $('#lookupList').html('');
-            $('#DivwaitingControl').addClass('hide');
-            $('#lookupList').html(data);
+    function bindCustomerList(text) {
+
+        var oTable1 = $('#CustomerList').dataTable({
+            "bPaginate": true,
+            "bDeferRender": true,
+            "bProcessing": true,
+            "bJQueryUI": true,
+            "sDom": '<"toolbar">frtip',
+            "sAjaxSource": "/Customer/CustomerListJson",
+            "iDisplayLength": 15,
+            "bDestroy": true,
+            "aoColumns": [
+                { "mData": "Button", "sTitle": "Action", "sWidth": "10%", "bSortable": false },
+                { "mData": "Code", "sTitle": "Customer Code", "sWidth": "30%", "bSortable": false },
+                { "mData": "Description", "sTitle": "Name", "sWidth": "30%", "bSortable": false },
+                { "mData": "Telephone", "sTitle": "Telephone", "sWidth": "30%", "bSortable": false }
+            ]
         });
     }
 
-    function FilterTblData() {
-        loadLookup(1);
-    }
+    function loadedit(code) {
+        $('#Divwaitingtr').removeclass('hide');
+        var url = 'Customer/EditCustomer';
+        var data = { code: code }
+        var title = 'Edit Customer';
 
-    function tableToExcel(table, name, filename) {
-        var uri = 'data:application/vnd.ms-excel;base64,',
-            template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body><table>{table}</table></body></html>'
-            , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
-            , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        $('#ActivityHeader').text(title);
+        $('#Addpopup_box').modal('show');
 
-        if (!table.nodeType) table = document.getElementById(table)
-        var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
-        document.getElementById("dlink").href = uri + base64(format(template, ctx));
-        document.getElementById("dlink").download = filename;
-        document.getElementById("dlink").click();
-    }
-
-
-    //function to create XML and show records which satisfies the given criteria
-    function ExportToExcel(tblName, pageno) {
-        var inputval = $("#SearchTxtbox" + tblName).val();
-        //inputval=Replace_SpecialCharacters(inputval);
-        inputval = $.c9ReplaceSpecialCharacters(inputval);
-        var itemcode = $("#ITEMCODE" + tblName).val();
-        var xmlfile = '<FILTERXML  SearchText="' + inputval + '" ></FILTERXML>';
-        ExportExcelGrid(0, 0, xmlfile, pageno, 'MyLoadTable', 'My');
+        $.get("/" + url, data, function (data) {
+            $('#LoadForm').html('');
+            $('#LoadForm').html(data);
+            $('#Divwaitingtr').addclass('hide');
+        });
     }
 </script>
 

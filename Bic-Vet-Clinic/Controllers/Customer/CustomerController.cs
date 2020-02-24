@@ -16,6 +16,7 @@ namespace Bic_Vet_Clinic.Controllers.Customer
     public class CustomerController : Controller
     {
         LoginSessionDetails SessLogObj = new LoginSessionDetails();
+        Result objRes;
         // GET: Customer
         [Route("Customer/Customers")]
         public ActionResult Index()
@@ -24,12 +25,12 @@ namespace Bic_Vet_Clinic.Controllers.Customer
         }
 
         private EvolutionSDK EvolutionSDKInstance(LoginSessionDetails SessLogObj)
-        { 
+        {
             string DbConStr = SessLogObj != null ? SessLogObj.objDb.DbConStr : "";
             string DbCommonConStr = SessLogObj != null ? SessLogObj.objDb.DbCommonConStr : "";
             string SerialNumber = SessLogObj != null ? SessLogObj.objDb.SerialNumber : "";
             string AuthCode = SessLogObj != null ? SessLogObj.objDb.AuthCode : "";
-            int branchId = SessLogObj != null ? SessLogObj.objDb.BranchId : 0; 
+            int branchId = SessLogObj != null ? SessLogObj.objDb.BranchId : 0;
             EvolutionSDK obj = new EvolutionSDK(DbConStr,
                                                 DbCommonConStr,
                                                 SerialNumber,
@@ -45,16 +46,30 @@ namespace Bic_Vet_Clinic.Controllers.Customer
             {
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
-                string criteria = searchtext !=null && searchtext!=""? "Account like '%" + searchtext + "%' OR Name like '%" + searchtext + "%'":"1=1";
-                List<Pastel.Evolution.Customer> objcustList = objEvol.customerList(criteria);
-                ViewBag.PageNo = PageNo;
-                ViewBag.totalpages = objcustList == null ? 0 : objcustList.Count / 10;
-                return PartialView(objcustList);
+                string criteria = searchtext != null && searchtext != "" ? "Account like '%" + searchtext + "%' OR Name like '%" + searchtext + "%'" : "1=1";
+                var dbresult = objEvol.customerList(criteria);
+                //ViewBag.PageNo = PageNo;
+                //ViewBag.totalpages = dbresult == null ? 0 : dbresult.Count / 10;
+                return PartialView(dbresult);
             }
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
+        }
+        public ActionResult CustomerListJson()
+        {
+            try
+            {
+                SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
+                EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
+                var dbresult = objEvol.customerList("");
+                return Json(new { aaData = dbresult }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ActionResult AddCustomer()
         {
@@ -69,15 +84,26 @@ namespace Bic_Vet_Clinic.Controllers.Customer
             {
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
-                obj = objEvol.addCustomer(obj);
-                 
-                Result rseXml =new Result(obj.Code == "" ? 0 : 1, "I");
+                string strxml = null;
+                var dbresult = objEvol.customerList();
+                if (dbresult == null)
+                {
+                    obj = objEvol.addCustomer(obj);
+                    strxml = (obj != null && obj.Code != "")
+                    ? "<SYSMSGS><ID>1</ID><ERRORMSGS>Succefully Added</ERRORMSGS><TYPE>S</TYPE><TITLE>Customer</TITLE></SYSMSGS>"
+                    : "<SYSMSGS><ID>-1</ID><ERRORMSGS>Error In Ading Record</ERRORMSGS><TYPE>E</TYPE><TITLE>Customer</TITLE></SYSMSGS>";
+                }
+                else
+                {
+                    strxml =  "<SYSMSGS><ID>1</ID><ERRORMSGS>Customer With This National Id Already Exist !</ERRORMSGS><TYPE>W</TYPE><TITLE>Warning !</TITLE></SYSMSGS>";
+                } 
+                Result rseXml = objRes.ReadBIErrors(strxml);
                 return Json(rseXml, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
-            { 
+            {
                 throw ex;
-            } 
+            }
         }
 
         public ActionResult EditCustomer(string code)
@@ -86,13 +112,13 @@ namespace Bic_Vet_Clinic.Controllers.Customer
             {
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
-                Pastel.Evolution.Customer objcust = objEvol.getCustomer(code); 
+                Pastel.Evolution.Customer objcust = objEvol.getCustomer(code);
                 return PartialView(objcust);
             }
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
         [HttpPost]
@@ -102,14 +128,35 @@ namespace Bic_Vet_Clinic.Controllers.Customer
             {
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
-                obj = objEvol.editCustomer(obj); 
-                Result rseXml = new Result(obj.Code == "" ? 0 : 1, "E");
+                obj = objEvol.editCustomer(obj);
+                string strxml =
+                    (obj != null && obj.Code != "")
+                    ? "<SYSMSGS><ID>1</ID><ERRORMSGS>Succefully Added</ERRORMSGS><TYPE>S</TYPE><TITLE>Pet</TITLE></SYSMSGS>"
+                    : "<SYSMSGS><ID>-1</ID><ERRORMSGS>Error In Ading Record</ERRORMSGS><TYPE>E</TYPE><TITLE>Pet</TITLE></SYSMSGS>";
+
+                Result rseXml = objRes.ReadBIErrors(strxml);
                 return Json(rseXml, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        public JsonResult CheckCustomerUnique(string nationalId)
+        {
+            try
+            {
+                SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
+                EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
+                var dbresult = objEvol.customerList();
+                return Json(dbresult, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

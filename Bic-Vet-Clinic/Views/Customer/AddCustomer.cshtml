@@ -4,51 +4,87 @@
     Layout = null;
 }
 
-<div class="row">
-    @using (Ajax.BeginForm("AddCustomer", "Customer", null, new AjaxOptions { OnBegin = "", OnComplete = "", OnSuccess = "OnSuccess", OnFailure = "" }, new { @id = "frmAddCustomer" }))
-    {
-        <div class="col-sm-12 col-xs-12">
-            <div class="form-group col-sm-12 col-xs-12">
-                <div class="form-group col-sm-12 col-xs-12">
-                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Customer Name <span class="red clsStar"><sub>*</sub></span></label>
-                    <div class="col-sm-8 col-xs-12">
-                        <input type="text" autocomplete="off" class="col-sm-12 clsreq" placeholder="Enter Customer Name." name="Description" id="Description">
+    <div class="row">
+        @using (Ajax.BeginForm("AddCustomer", "Customer", null, new AjaxOptions { OnBegin = "", OnComplete = "", OnSuccess = "OnSuccess", OnFailure = "" }, new { @id = "frmAddCustomer" }))
+        {
+            <div class="col-sm-12 col-xs-12">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Customer Name <span class="red clsStar"><sub>*</sub></span></label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" autocomplete="off" class="col-sm-12 clsreq" placeholder="Enter Customer Name." name="Description" id="Description">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">National Id <span class="red clsStar"><sub>*</sub></span></label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" autocomplete="off" class="col-sm-12 clsreq" placeholder="Enter National Id." name="IDNumber" id="IDNumber">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-12 col-xs-12">
-                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">National Id <span class="red clsStar"><sub>*</sub></span></label>
-                    <div class="col-sm-8 col-xs-12">
-                        <input type="text" autocomplete="off" class="col-sm-12 clsreq" placeholder="Enter National Id." name="IDNumber" id="IDNumber">
+                <div class="form-group col-sm-6 col-xs-12">
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Telephone</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input type="text" autocomplete="off" class="col-sm-12" placeholder="Enter Telephone." name="Telephone" id="Telephone">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12 col-xs-12">
+                        <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Address</label>
+                        <div class="col-sm-8 col-xs-12">
+                            @Html.TextBoxFor(a => a.Addressee, new { @class = "col-xs-12 col-sm-12", @autocomplete = "off", placeholder = "Enter Address" })
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-sm-12 col-xs-12">
-                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Telephone</label>
-                    <div class="col-sm-8 col-xs-12">
-                        <input type="text" autocomplete="off" class="col-sm-12" placeholder="Enter Telephone." name="Telephone" id="Telephone">
-                    </div>
-                </div>
-                <div class="form-group col-sm-12 col-xs-12">
-                    <label class="col-sm-4 col-xs-12 control-label no-padding-right align-left">Address</label>
-                    <div class="col-sm-8 col-xs-12">
-                        @Html.TextBoxFor(a => a.Addressee, new { @class = "col-xs-12 col-sm-12", @autocomplete = "off", placeholder = "Enter Address" })
-                    </div>
-                </div>
-            </div> 
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-12 col-xs-12 modal-footer" style="text-align:right">
+            </div>
+            <div class="col-sm-12 col-xs-12" style="text-align:right">
                 <button id="btnSubmit" type="submit" class="btn btn-white btn-xs btn-info" onclick="return Validater();">
                     <i title="Save" style="cursor: pointer; font-style: normal;" class="fa fa-check"></i> Save
                 </button>
+            </div>
+            <div class="space-10"></div>
+
+        }
+        <div id="petListdiv" class="hide col-sm-12 col-xs-12 no-padding">
+            <div class="tab-content">
+                <div id="My" class="tab-pane in active">
+                    <div id="DivwaitingCtrlview" style="z-index:1040;position:absolute;top:10%;" class="col-sm-12 col-xs-12 row hide center modal-backdrop fade in">
+                        <i class="fa fa-spinner fa fa-spin orange bigger-300 "></i>
+                    </div>
+                    <div id="petListinDivs" class="row no-padding">
+                        <table id="PetList" class="table table-striped table-bordered table-hover table-condensed width-100"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 col-xs-12 modal-footer" style="text-align:right">
                 <button id="btnCancel" data-dismiss="modal" type="button" class="btn btn-white btn-danger btn-xs">
                     <i title="Cancel" class="ace-icon fa fa-times"></i> Cancel
                 </button>
             </div>
         </div>
-    }
-</div>
+    </div>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        $("#IDNumber").on('blur', function () {
+            $('#Divwaitingtr').removeClass('hide');
+            var url = "/Customer/CheckCustomerUnique";
+            var data = { nationalId: $("#IDNumber").val() }
+            $.get(url, data, function (data) {
+                if (data.Code != null) {
+                    $("#IDNumber").focus();
+                    $("#IDNumber").val("");
+                    $.c9Message('This Natinal Id Already Exist', 'Warning', 'W');
+                    $('#Divwaitingtr').addClass('hide');
+                } else {
+                    $('#Divwaitingtr').addClass('hide');
+                }
+            });
+        });
+    }(jQuery));
+</script>
 <script type="text/javascript">
     //Script for showing success or error message on page
     function OnSuccess(res) {
@@ -61,13 +97,12 @@
             $.c9Message(errmsg, TITLE, TYPE);
         }
         else {
-            $('#Addpopup_box').modal('hide');
+            //$('#Addpopup_box').modal('hide');
+            $('#petListdiv').removeClass('hide');
+
             $.c9Message(errmsg, TITLE, TYPE);
         }
     }
-
-    $(document).ready(function () {     
-    });
 
     //Validation For State Field
     function Validater() {
@@ -82,7 +117,7 @@
             $("#IDNumber").focus();
             $("#IDNumber").val("");
             return false;
-        } 
+        }
     }
 </script>
 

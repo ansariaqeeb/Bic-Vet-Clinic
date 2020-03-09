@@ -710,6 +710,7 @@
     <Content Include="Content\popModal.css" />
     <Content Include="Content\prettify.css" />
     <Content Include="Content\respMenu.css" />
+    <Content Include="Content\select2-spinner.gif" />
     <Content Include="Content\select2.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\summernote\summernote-bs4.css" />
@@ -785,6 +786,7 @@
     <Content Include="Content\wizard_files\searchBox.png" />
     <Content Include="Content\wizard_files\standalone.css" />
     <Content Include="Content\wizard_files\THE_BLANK_SUBMIT_BUTTON_IMAGE.png" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -871,10 +873,13 @@
     <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
     <Content Include="Scripts\Highcharts-4.0.1\stock\highstock.js" />
     <None Include="Properties\PublishProfiles\Aqeeb.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
     <Content Include="Scripts\jQuery.hotKeyMap-1.0.js" />
     <Content Include="Scripts\jquery.hotkeys-0.8.js" />
@@ -1154,6 +1159,7 @@
     <Compile Include="Controllers\CommonLibrary\CommonLibraryController.cs" />
     <Compile Include="Controllers\Customer\CustomerController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\Pet\PetController.cs" />
     <Compile Include="Controllers\Reports\RenderReportController.cs" />
     <Compile Include="Filters\CustomAuthorizationAttribute.cs" />
     <Compile Include="Filters\CustomExceptionAttribute.cs" />
@@ -1360,7 +1366,6 @@
     <Content Include="fonts\OpenSans-300.woff" />
     <Content Include="fonts\OpenSans-400.woff" />
     <Content Include="Scripts\d3\LICENSE" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\nv.d3.min.js.map" />
     <Content Include="Scripts\skins\lightgray\AbsoluteLayout.less" />
     <Content Include="Scripts\skins\lightgray\Animations.less" />
@@ -1440,6 +1445,8 @@
     <Content Include="Views\Customer\CustomerList.cshtml" />
     <Content Include="Views\Customer\AddCustomer.cshtml" />
     <Content Include="Views\Customer\EditCustomer.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1453,6 +1460,7 @@
     <Folder Include="Models\" />
     <Folder Include="Reports\" />
     <Folder Include="Views\CommonLibrary\" />
+    <Folder Include="Views\Pet\" />
     <Folder Include="Views\RenderReport\" />
   </ItemGroup>
   <ItemGroup>

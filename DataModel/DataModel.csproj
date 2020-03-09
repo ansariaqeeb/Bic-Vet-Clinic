@@ -61,11 +61,14 @@
     <Compile Include="LoginModel\LoginModels.cs" />
     <Compile Include="LoginModel\LoginSessionDetails.cs" />
     <Compile Include="Master\Account.cs" />
+    <Compile Include="Master\bookAppointment.cs" />
     <Compile Include="Master\CacheHelper.cs" />
     <Compile Include="Master\CompanyMaster.cs" />
     <Compile Include="Master\customer.cs" />
     <Compile Include="Master\Login.cs" />
+    <Compile Include="Master\pet.cs" />
     <Compile Include="Master\TokenServices.cs" />
+    <Compile Include="Master\treatmentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master\userMaster.cs" />
     <Compile Include="Result\Result.cs" />

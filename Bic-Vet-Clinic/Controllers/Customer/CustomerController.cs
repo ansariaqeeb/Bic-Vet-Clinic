@@ -16,7 +16,7 @@ namespace Bic_Vet_Clinic.Controllers.Customer
     public class CustomerController : Controller
     {
         LoginSessionDetails SessLogObj = new LoginSessionDetails();
-        Result objRes;
+        Result objRes= new Result();
         // GET: Customer
         [Route("Customer/Customers")]
         public ActionResult Index()
@@ -48,8 +48,6 @@ namespace Bic_Vet_Clinic.Controllers.Customer
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
                 string criteria = searchtext != null && searchtext != "" ? "Account like '%" + searchtext + "%' OR Name like '%" + searchtext + "%'" : "1=1";
                 var dbresult = objEvol.customerList(criteria);
-                //ViewBag.PageNo = PageNo;
-                //ViewBag.totalpages = dbresult == null ? 0 : dbresult.Count / 10;
                 return PartialView(dbresult);
             }
             catch (Exception ex)
@@ -63,7 +61,7 @@ namespace Bic_Vet_Clinic.Controllers.Customer
             {
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
-                var dbresult = objEvol.customerList("");
+                var dbresult = objEvol.customerList();
                 return Json(new { aaData = dbresult }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -85,20 +83,20 @@ namespace Bic_Vet_Clinic.Controllers.Customer
                 SessLogObj = (LoginSessionDetails)HttpContext.Session["SessionInformation"];
                 EvolutionSDK objEvol = EvolutionSDKInstance(SessLogObj);
                 string strxml = null;
-                var dbresult = objEvol.customerList();
+                var dbresult = objEvol.customerList("cIDNumber = '" + obj.IDNumber+"'");
                 if (dbresult == null)
                 {
                     obj = objEvol.addCustomer(obj);
                     strxml = (obj != null && obj.Code != "")
-                    ? "<SYSMSGS><ID>1</ID><ERRORMSGS>Succefully Added</ERRORMSGS><TYPE>S</TYPE><TITLE>Customer</TITLE></SYSMSGS>"
-                    : "<SYSMSGS><ID>-1</ID><ERRORMSGS>Error In Ading Record</ERRORMSGS><TYPE>E</TYPE><TITLE>Customer</TITLE></SYSMSGS>";
+                    ? "<SYSMSGS><ID>1</ID><ERRORMSGS>Succefully Added</ERRORMSGS><TYPE>S</TYPE><TITLE>Customer</TITLE><EXTRA>"+obj.Code+"</EXTRA></SYSMSGS>"
+                    : "<SYSMSGS><ID>-1</ID><ERRORMSGS>Error In Adding Record</ERRORMSGS><TYPE>E</TYPE><TITLE>Customer</TITLE><EXTRA>" + obj.Code + "</EXTRA></SYSMSGS>";
                 }
                 else
                 {
-                    strxml =  "<SYSMSGS><ID>1</ID><ERRORMSGS>Customer With This National Id Already Exist !</ERRORMSGS><TYPE>W</TYPE><TITLE>Warning !</TITLE></SYSMSGS>";
-                } 
-                Result rseXml = objRes.ReadBIErrors(strxml);
-                return Json(rseXml, JsonRequestBehavior.AllowGet);
+                    strxml =  "<SYSMSGS><ID>-1</ID><ERRORMSGS>Customer With This National Id Already Exist !</ERRORMSGS><TYPE>W</TYPE><TITLE>Warning !</TITLE></SYSMSGS>";
+                }
+                objRes = objRes.ReadBIErrors(strxml);
+                return Json(objRes, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

@@ -78,246 +78,79 @@ namespace DataModel
         }
 
         #region C section
-        static public XDocument ST_workingCalendar_C(string flag, int MID, int year, int userId, XElement xmlWorkDays, XElement LOGXML)
+        static public XDocument petMaster_C(string flag, int Id, int branchId, string code, string petName, string registrationNo, DateTime dob, string sex, string species, string breed, bool isSterilized, bool isActive, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
            new XElement("SPDETAILS",
            new XAttribute("flag", flag),
-           new XAttribute("MID", MID),
-           new XAttribute("year", year),
-           new XAttribute("userId", userId)
-           ));
-            MAINXML.Add(xmlWorkDays);
-            XDocument CreateXml = CommonXML("ST_workingCalendar_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument ST_PriceListMapping_C(string flag, int userId, XElement xmlWorkDays, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", flag),
+           new XAttribute("Id", Id),
+           new XAttribute("branchId", branchId),
+           new XAttribute("code", code),
+           new XAttribute("petName", petName),
+           new XAttribute("registrationNo", registrationNo),
+           new XAttribute("dob", dob),
+           new XAttribute("sex", sex),
+           new XAttribute("species", species),
+           new XAttribute("breed", breed),
+           new XAttribute("isActive", isActive),
+           new XAttribute("isSterilized", isSterilized),
            new XAttribute("USERID", userId)
            ));
-            MAINXML.Add(xmlWorkDays);
-            XDocument CreateXml = CommonXML("ST_PriceListMapping_C", MAINXML, LOGXML);
+            XDocument CreateXml = CommonXML("petMaster_C", MAINXML, LOGXML);
             return CreateXml;
         }
-        static public XDocument ST_Invoice_C(string FLAG, int MID, string INVCNUMB, DateTime INVCDATE, int JOBID, string VOYAGENO, string VOYAGEDESC, string VESSEL, DateTime ETA, DateTime ETD, int CUSTOMERID, string CUSTOMER, string ADDRESSDESC, string CURRENCY, decimal CONVRATE, int USERID, int MENUID, XElement TRANSXML, XElement LOGXML)
+
+
+        static public XDocument bookAppointment_C(string flag, int Id, int branchId, string bookingNo, string custCode, string docCode, string petCode, DateTime bookDateTime, string bookingStatus, bool isActive, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
            new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("INVCNUMB", INVCNUMB),
-           new XAttribute("INVCDATE", INVCDATE),
-           new XAttribute("JOBID", JOBID),
-           new XAttribute("VOYAGENO", VOYAGENO),
-           new XAttribute("VOYAGEDESC", VOYAGEDESC),
-           new XAttribute("VESSEL", VESSEL),
-           new XAttribute("ETA", ETA),
-           new XAttribute("ETD", ETD),
-           new XAttribute("CUSTOMERID", CUSTOMERID),
-           new XAttribute("CUSTOMER", CUSTOMER),
-           new XAttribute("ADDRESSDESC", ADDRESSDESC),
-           new XAttribute("CURRENCY", CURRENCY),
-           new XAttribute("CONVRATE", CONVRATE),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
+           new XAttribute("flag", flag),
+           new XAttribute("Id", Id),
+           new XAttribute("branchId", branchId),
+           new XAttribute("bookingNo", bookingNo),
+           new XAttribute("custCode", custCode),
+           new XAttribute("docCode", docCode),
+           new XAttribute("petCode", petCode),
+           new XAttribute("bookDateTime", bookDateTime),
+           new XAttribute("bookingStatus", bookingStatus),
+           new XAttribute("isActive", isActive),
+           new XAttribute("userId", userId)
            ));
-            MAINXML.Add(TRANSXML);
-            XDocument CreateXml = CommonXML("ST_Invoice_C", MAINXML, LOGXML);
+            XDocument CreateXml = CommonXML("bookAppointment_C", MAINXML, LOGXML);
             return CreateXml;
         }
-        static public XDocument st_ShInvoice_C(string FLAG, int MID, string INVCNUMB, DateTime INVCDATE, int JOBID, string VOYAGENO, string VOYAGEDESC, string VESSEL, DateTime ETA, DateTime ETD, int CUSTOMERID, string CUSTOMER, string ADDRESSDESC, string CURRENCY, decimal CONVRATE, int USERID, int MENUID, XElement TRANSXML, XElement LOGXML)
+
+
+        static public XDocument treatmentService_C(string flag, int RTid, int RMid, int serviceItemId, string serviceItem, string serviceItemDesc, string uomDesc,
+            decimal qty, decimal rate, decimal tax, string taxCode, decimal amount, decimal taxAmount, decimal exclusiveAmount, decimal inclusiveAmount, string remark,
+            bool isActive, int branchId, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
            new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("INVCNUMB", INVCNUMB),
-           new XAttribute("INVCDATE", INVCDATE),
-           new XAttribute("JOBID", JOBID),
-           new XAttribute("VOYAGENO", VOYAGENO),
-           new XAttribute("VESSEL", VESSEL),
-           new XAttribute("VOYAGEDESC", VOYAGEDESC),
-           new XAttribute("ETA", ETA),
-           new XAttribute("ETD", ETD),
-           new XAttribute("CUSTOMERID", CUSTOMERID),
-           new XAttribute("CUSTOMER", CUSTOMER),
-           new XAttribute("ADDRESSDESC", ADDRESSDESC),
-           new XAttribute("CURRENCY", CURRENCY),
-           new XAttribute("CONVRATE", CONVRATE),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
+           new XAttribute("flag", flag),
+           new XAttribute("RTid", RTid),
+           new XAttribute("RMid", RMid),
+           new XAttribute("serviceItemId", serviceItemId),
+           new XAttribute("serviceItem", serviceItem),
+           new XAttribute("serviceItemDesc", serviceItemDesc),
+           new XAttribute("uomDesc", uomDesc),
+           new XAttribute("qty", qty),
+           new XAttribute("rate", rate),
+           new XAttribute("tax", tax),
+           new XAttribute("rate", rate),
+           new XAttribute("taxCode", taxCode),
+           new XAttribute("amount", amount),
+           new XAttribute("taxAmount", taxAmount),
+           new XAttribute("exclusiveAmount", exclusiveAmount),
+           new XAttribute("inclusiveAmount", inclusiveAmount),
+           new XAttribute("remark", remark),
+           new XAttribute("isActive", isActive),
+           new XAttribute("userId", userId)
            ));
-            MAINXML.Add(TRANSXML);
-            XDocument CreateXml = CommonXML("st_ShInvoice_C", MAINXML, LOGXML);
+            XDocument CreateXml = CommonXML("treatmentService_C", MAINXML, LOGXML);
             return CreateXml;
         }
-
-
-        static public XDocument st_AgencyFeeInvoice_C(string FLAG, int MID, string INVCNUMB, DateTime INVCDATE, int JOBID, string VOYAGENO, string VOYAGEDESC, string VESSELTYPE, string VESSELNAME, DateTime AADATE, DateTime ADDATE, int CUSTOMERID, string CUSTOMER, string ADDRESSDESC, string CURRENCY, string InvcType,
-            string PSItemCode1, string PSItemCode2, string PSItemCode3, string RVItemCode1, string RVItemCode2, string TransportGorup, string CrewChangeGroup, int USERID, int MENUID, XElement TRANSXML, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("INVCNUMB", INVCNUMB),
-           new XAttribute("INVCDATE", INVCDATE),
-           new XAttribute("JOBID", JOBID),
-           new XAttribute("VOYAGENO", VOYAGENO),
-           new XAttribute("VOYAGEDESC", VOYAGEDESC),
-           new XAttribute("VESSELTYPE", VESSELTYPE),
-           new XAttribute("VESSELNAME", VESSELNAME),
-           new XAttribute("AADATE", AADATE),
-           new XAttribute("ADDATE", ADDATE),
-           new XAttribute("CUSTOMERID", CUSTOMERID),
-           new XAttribute("CUSTOMER", CUSTOMER),
-           new XAttribute("ADDRESSDESC", ADDRESSDESC),
-           new XAttribute("CURRENCY", CURRENCY),
-           new XAttribute("INVCTYPE", InvcType),
-           new XAttribute("PSItemCode1", PSItemCode1),
-           new XAttribute("PSItemCode2", PSItemCode2),
-           new XAttribute("PSItemCode3", PSItemCode3),
-           new XAttribute("RVItemCode1", RVItemCode1),
-           new XAttribute("RVItemCode2", RVItemCode2),
-           new XAttribute("TransportGorup", TransportGorup),
-           new XAttribute("CrewChangeGroup", CrewChangeGroup),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
-           ));
-            MAINXML.Add(TRANSXML);
-            XDocument CreateXml = CommonXML("st_AgencyFeeInvoice_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument st_AgencyFeeInvoiceTnas_C(string FLAG, int USERID, XElement TRANSXML, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("USERID", USERID)
-           ));
-            MAINXML.Add(TRANSXML);
-            XDocument CreateXml = CommonXML("st_AgencyFeeInvoiceTnas_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-
-        static public XDocument ST_InvoiceTrans_C(string FLAG, int TID, int RMID, DateTime TRANSDATE, int ITEMID, int DAYTYPE, string ITEMDESC, string ITEMCODE, bool ISOVERTIME, decimal QTY1, string UOM1, decimal QTY2, string UOM2, decimal RATE, decimal TAX, decimal TAXAMOUNT, decimal AMOUNT, string REMARK,
-           decimal DAYTYPE1MINCHARGE, decimal DAYTYPE2MINCHARGE, decimal DAYTYPE3MINCHARGE, decimal DAYTYPE4MINCHARGE, decimal DAYTYPE1RATE, decimal DAYTYPE2RATE, decimal DAYTYPE3RATE, decimal DAYTYPE4RATE, int ISMINCHRGAPPL, int USERID, int MENUID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("TID", TID),
-           new XAttribute("RMID", RMID),
-           new XAttribute("TRANSDATE", TRANSDATE),
-           new XAttribute("ITEMID", ITEMID),
-           new XAttribute("ITEMDESC", ITEMDESC),
-           new XAttribute("ITEMCODE", ITEMCODE),
-           new XAttribute("ISOVERTIME", ISOVERTIME),
-           new XAttribute("DAYTYPE", DAYTYPE),
-           new XAttribute("QTY1", QTY1),
-           new XAttribute("UOM1", UOM1),
-           new XAttribute("QTY2", QTY2),
-           new XAttribute("UOM2", UOM2),
-           new XAttribute("RATE", RATE),
-           new XAttribute("TAX", TAX),
-           new XAttribute("TAXAMOUNT", TAXAMOUNT),
-           new XAttribute("AMOUNT", AMOUNT),
-           new XAttribute("REMARK", REMARK),
-           new XAttribute("DAYTYPE1RATE", DAYTYPE1RATE),
-           new XAttribute("DAYTYPE2RATE", DAYTYPE2RATE),
-           new XAttribute("DAYTYPE3RATE", DAYTYPE3RATE),
-           new XAttribute("DAYTYPE4RATE", DAYTYPE4RATE),
-           new XAttribute("DAYTYPE1MINCHARGE", DAYTYPE1MINCHARGE),
-           new XAttribute("DAYTYPE2MINCHARGE", DAYTYPE2MINCHARGE),
-           new XAttribute("DAYTYPE3MINCHARGE", DAYTYPE3MINCHARGE),
-           new XAttribute("DAYTYPE4MINCHARGE", DAYTYPE4MINCHARGE),
-           new XAttribute("ISMINCHRGAPPL", ISMINCHRGAPPL),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
-           ));
-            XDocument CreateXml = CommonXML("ST_InvoiceTrans_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument ST_ShInvoiceTrans_C(string FLAG, int TID, int RMID, DateTime TRANSDATE, int ITEMID, int DAYTYPE, string ITEMDESC, string ITEMCODE, bool ISOVERTIME, decimal QTY1, string UOM1, decimal QTY2, string UOM2, decimal RATE, decimal TAX, decimal TAXAMOUNT, decimal AMOUNT, string REMARK,
-           decimal DAYTYPE1MINCHARGE, decimal DAYTYPE2MINCHARGE, decimal DAYTYPE3MINCHARGE, decimal DAYTYPE4MINCHARGE, decimal DAYTYPE1RATE, decimal DAYTYPE2RATE, decimal DAYTYPE3RATE, decimal DAYTYPE4RATE, int ISMINCHRGAPPL, int USERID, int MENUID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("TID", TID),
-           new XAttribute("RMID", RMID),
-           new XAttribute("TRANSDATE", TRANSDATE),
-           new XAttribute("ITEMID", ITEMID),
-           new XAttribute("ITEMDESC", ITEMDESC),
-           new XAttribute("ITEMCODE", ITEMCODE),
-           new XAttribute("ISOVERTIME", ISOVERTIME),
-           new XAttribute("DAYTYPE", DAYTYPE),
-           new XAttribute("QTY1", QTY1),
-           new XAttribute("UOM1", UOM1),
-           new XAttribute("QTY2", QTY2),
-           new XAttribute("UOM2", UOM2),
-           new XAttribute("RATE", RATE),
-           new XAttribute("TAX", TAX),
-           new XAttribute("TAXAMOUNT", TAXAMOUNT),
-           new XAttribute("AMOUNT", AMOUNT),
-           new XAttribute("REMARK", REMARK),
-           new XAttribute("DAYTYPE1RATE", DAYTYPE1RATE),
-           new XAttribute("DAYTYPE2RATE", DAYTYPE2RATE),
-           new XAttribute("DAYTYPE3RATE", DAYTYPE3RATE),
-           new XAttribute("DAYTYPE4RATE", DAYTYPE4RATE),
-           new XAttribute("DAYTYPE1MINCHARGE", DAYTYPE1MINCHARGE),
-           new XAttribute("DAYTYPE2MINCHARGE", DAYTYPE2MINCHARGE),
-           new XAttribute("DAYTYPE3MINCHARGE", DAYTYPE3MINCHARGE),
-           new XAttribute("DAYTYPE4MINCHARGE", DAYTYPE4MINCHARGE),
-           new XAttribute("ISMINCHRGAPPL", ISMINCHRGAPPL),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
-           ));
-            XDocument CreateXml = CommonXML("ST_ShInvoiceTrans_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-
-        static public XDocument st_AgencyFeeInvoiceTrans_C(string FLAG, int TID, int RMID, DateTime TRANSDATE, int ITEMID, int DAYTYPE, string ITEMDESC, decimal QTY, string UOM, decimal RATE, decimal TAX, decimal TAXAMOUNT, decimal AMOUNT, string REMARK,
-       decimal DAYTYPE1MINCHARGE, decimal DAYTYPE2MINCHARGE, decimal DAYTYPE3MINCHARGE, decimal DAYTYPE4MINCHARGE, decimal DAYTYPE1RATE, decimal DAYTYPE2RATE, decimal DAYTYPE3RATE, decimal DAYTYPE4RATE, int USERID, int MENUID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("TID", TID),
-           new XAttribute("RMID", RMID),
-           new XAttribute("TRANSDATE", TRANSDATE),
-           new XAttribute("ITEMID", ITEMID),
-           new XAttribute("ITEMDESC", ITEMDESC),
-           new XAttribute("DAYTYPE", DAYTYPE),
-           new XAttribute("QTY", QTY),
-           new XAttribute("UOM", UOM),
-           new XAttribute("RATE", RATE),
-           new XAttribute("TAX", TAX),
-           new XAttribute("TAXAMOUNT", TAXAMOUNT),
-           new XAttribute("AMOUNT", AMOUNT),
-           new XAttribute("REMARK", REMARK),
-           new XAttribute("DAYTYPE1RATE", DAYTYPE1RATE),
-           new XAttribute("DAYTYPE2RATE", DAYTYPE2RATE),
-           new XAttribute("DAYTYPE3RATE", DAYTYPE3RATE),
-           new XAttribute("DAYTYPE4RATE", DAYTYPE4RATE),
-           new XAttribute("DAYTYPE1MINCHARGE", DAYTYPE1MINCHARGE),
-           new XAttribute("DAYTYPE2MINCHARGE", DAYTYPE2MINCHARGE),
-           new XAttribute("DAYTYPE3MINCHARGE", DAYTYPE3MINCHARGE),
-           new XAttribute("DAYTYPE4MINCHARGE", DAYTYPE4MINCHARGE),
-           new XAttribute("USERID", USERID),
-           new XAttribute("MENUID", MENUID)
-           ));
-            XDocument CreateXml = CommonXML("st_AgencyFeeInvoiceTrans_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
 
         static public XDocument dbConfig_C(string flag, int dbConfigId, string dbName, string sqlDBAuthType, string dbServerName, string dbUserId, string dbPassword, string dbDatabaseName,
             string sqlDBCommAuthType, string dbCommServerName, string dbCommDatabaseName, string dbCommUserId, string dbCommPassword, string serialNumber, string authCode, bool isActive,
@@ -351,21 +184,7 @@ namespace DataModel
 
 
 
-        static public XDocument ST_holidayCalendar_C(string flag, int MID, DateTime holidayDate, string description, int year, bool isActive, int userId, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("flag", flag),
-           new XAttribute("MID", MID),
-           new XAttribute("holidayDate", holidayDate),
-           new XAttribute("description", description),
-           new XAttribute("isActive", isActive),
-           new XAttribute("year", year),
-           new XAttribute("userId", userId)
-           ));
-            XDocument CreateXml = CommonXML("ST_holidayCalendar_C", MAINXML, LOGXML);
-            return CreateXml;
-        }
+
 
 
         #endregion
@@ -410,178 +229,54 @@ namespace DataModel
         }
 
 
-        static public XDocument ST_workingCaledar_G(int flag, int MID, string desc, int userId, XElement LOGXML)
+        static public XDocument petMaster_g(int flag, int id, string name, string custCode, int branchId, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
            new XElement("SPDETAILS",
            new XAttribute("flag", flag),
-           new XAttribute("MID", MID),
-           new XAttribute("desc", desc),
+           new XAttribute("id", id),
+           new XAttribute("name", name),
+           new XAttribute("custCode", custCode),
+           new XAttribute("branchId", branchId),
            new XAttribute("userId", userId)
            ));
-            XDocument CreateXml = CommonXML("ST_workingCaledar_G", MAINXML, LOGXML);
+            XDocument CreateXml = CommonXML("petMaster_g", MAINXML, LOGXML);
             return CreateXml;
         }
 
 
-        static public XDocument ST_INVOICE_g(int FLAG, int MID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("ST_INVOICE_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument st_ShInvoice_g(int FLAG, int MID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_ShInvoice_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument st_AgencyFeeInvoice_g(int FLAG, int MID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_AgencyFeeInvoice_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-
-        static public XDocument INVOICEDOCAMOUNT_g(int MID, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("MID", MID),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("INVOICEDOCAMOUNT_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument st_ShInvoiceDocAmount_g(int MID, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("MID", MID),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_ShInvoiceDocAmount_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument ST_INVOICETRANS_g(int FLAG, int MID, int TID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-            new XAttribute("TID", TID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("ST_INVOICETRANS_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument st_ShInvoiceTrans_g(int FLAG, int MID, int TID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-            new XAttribute("TID", TID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_ShInvoiceTrans_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument st_AgencyInvoiceTrans_g(int FLAG, int MID, int TID, string DESC, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("FLAG", FLAG),
-           new XAttribute("MID", MID),
-            new XAttribute("TID", TID),
-           new XAttribute("DESC", DESC),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_AgencyInvoiceTrans_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument ST_INVOICETRANSDTLPOSTING_g(int MID, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("MID", MID),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("ST_INVOICETRANSDTLPOSTING_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-        static public XDocument st_ShInvoiceTransDtlPosting_g(int MID, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("MID", MID),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_ShInvoiceTransDtlPosting_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument st_AgencyInvTransDtlPosting_g(int MID, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-           new XElement("SPDETAILS",
-           new XAttribute("MID", MID),
-           new XAttribute("USERID", USERID)
-           ));
-            XDocument CreateXml = CommonXML("st_AgencyInvTransDtlPosting_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-
-        static public XDocument holidayCalendar_G(int flag, int MID, string desc, int userId, XElement LOGXML)
+        static public XDocument bookAppointment_g(int flag, int id, string bookingNo, string docCode, string custCode, int branchId, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
            new XElement("SPDETAILS",
            new XAttribute("flag", flag),
-           new XAttribute("MID", MID),
-           new XAttribute("desc", desc),
+           new XAttribute("id", id),
+           new XAttribute("bookingNo", bookingNo),
+           new XAttribute("docCode", docCode),
+           new XAttribute("custCode", custCode),
+           new XAttribute("branchId", branchId),
            new XAttribute("userId", userId)
            ));
-            XDocument CreateXml = CommonXML("holidayCalendar_G", MAINXML, LOGXML);
+            XDocument CreateXml = CommonXML("bookAppointment_g", MAINXML, LOGXML);
             return CreateXml;
         }
-
-        static public XDocument STATUSMASTER_h(int TYPEID, int STATUSID, string DESC, int Flag, XElement LOGXML, string CONDITION)
+        static public XDocument treatmentService_g(int flag, int rTid, int rMid, int serviceItemId, string serviceItem, string serviceItemDesc, int branchId, int userId, XElement LOGXML)
         {
             XElement MAINXML = new XElement("SPXML",
-            new XElement("SPDETAILS",
-            new XAttribute("TYPEID", TYPEID),
-            new XAttribute("FLAG", Flag),
-            new XAttribute("STATUSID", STATUSID),
-            new XAttribute("CONDITION", CONDITION),
-            new XAttribute("DESC", DESC)));
-            XDocument CreateXml = CommonXML("STATUSMASTER_h", MAINXML, LOGXML);//NO
+           new XElement("SPDETAILS",
+           new XAttribute("flag", flag),
+           new XAttribute("rTid", rTid),
+           new XAttribute("rMid", rMid),
+           new XAttribute("serviceItemId", serviceItemId),
+           new XAttribute("serviceItem", serviceItem),
+           new XAttribute("serviceItemDesc", serviceItemDesc),
+             new XAttribute("branchId", branchId),
+           new XAttribute("userId", userId)
+           ));
+            XDocument CreateXml = CommonXML("treatmentService_g", MAINXML, LOGXML);
             return CreateXml;
         }
+        
 
         static public XDocument ST_SYSCONTROLENO_h(int CONTROLNO, string DESC, int FLAG, XElement LOGXML)
         {
@@ -591,39 +286,6 @@ namespace DataModel
             new XAttribute("DESC", DESC),
             new XAttribute("FLAG", FLAG)));
             XDocument CreateXml = CommonXML("ST_SYSCONTROLENO_h", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument ST_CHECKDATE_g(DateTime SERVICEDATE, int USERID, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-            new XElement("SPDETAILS",
-            new XAttribute("SERVICEDATE", SERVICEDATE),
-            new XAttribute("USERID", USERID)));
-            XDocument CreateXml = CommonXML("ST_CHECKDATE_g", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument st_dashBoardCount(DateTime fromDate, DateTime toDate, bool isStevedoringAppl, bool isShoreHandlingAppl, bool isAgencyFeeAppl, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-            new XElement("SPDETAILS",
-            new XAttribute("fromDate", fromDate),
-            new XAttribute("toDate", toDate),
-            new XAttribute("isStevedoringAppl", isStevedoringAppl),
-            new XAttribute("isShoreHandlingAppl", isShoreHandlingAppl),
-            new XAttribute("isAgencyFeeAppl", isAgencyFeeAppl)));
-            XDocument CreateXml = CommonXML("st_dashBoardCount", MAINXML, LOGXML);
-            return CreateXml;
-        }
-
-        static public XDocument companyMaster_h(int COMPID, string DESC, int Flag, XElement LOGXML)
-        {
-            XElement MAINXML = new XElement("SPXML",
-            new XElement("SPDETAILS",
-            new XAttribute("COMPID", COMPID),
-            new XAttribute("DESC", DESC)));
-            XDocument CreateXml = CommonXML("companyMaster_h", MAINXML, LOGXML);
             return CreateXml;
         }
 

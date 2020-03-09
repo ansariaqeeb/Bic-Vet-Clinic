@@ -77,14 +77,12 @@ namespace Bic_Vet_Clinic.App_Start
                 "~/Scripts/nod.min.js",
                 "~/assets/js/jquery.nestable.min.js",
                 "~/assets/js/ProjectCommon.js",
-                "~/assets/js/date-time/bootstrap-datepicker_ver-8Dec2014.js",//bootstrap-datepicker.min.js
+                "~/assets/js/date-time/bootstrap-datepicker_ver-8Dec2014.js",
                 "~/assets/js/jquery.maskedinput.min.js",
                 "~/assets/js/C9UserControl.js",
                 "~/assets/js/jqGrid/jquery.jqGrid.src.js",
                 "~/assets/js/jquery.slimscroll.js",
                 "~/assets/js/C9HelpControl.js"
-
-                //"~/Scripts/jquery.unobtrusive-ajax.js"
                 ));
 
             BundleTable.EnableOptimizations = true;

@@ -87,49 +87,7 @@ namespace DataModel.Transaction
         { 
             ConStr = conStr;
         }
-        public int JobPosting(int MID,int WarehouseId,string dbConnectionString,string evolutionCommonDBConnectionString,string serialNumber,string authCode,int USERID,XElement LOGXML=null)
-        {
-            try
-            {
-                xdoc = DBXML.ST_INVOICETRANSDTLPOSTING_g(MID, USERID, LOGXML);
-                DataTable dt = SqlExev2.GetDT(xdoc, ConStr);
-                List<JobCardPosting> dbresult = dt != null ? (from s in dt.AsEnumerable()
-                                                            select new JobCardPosting
-                                                            {
-                                                                VOYAGENO = s.Field<string>("VOYAGENO"), 
-                                                                ITEMID = s.Field<int>("ITEMID"),
-                                                                TOTALVALUE = s.Field<decimal>("AMOUNT") 
-                                                            }).ToList() : null;
-
-                DatabaseContext.Initialise(dbConnectionString, evolutionCommonDBConnectionString, serialNumber, authCode);
-                JobCard jc = new JobCard(dbresult.FirstOrDefault().VOYAGENO);
-
-                foreach (var item in dbresult)
-                {
-                    JobDetail jd = new JobDetail();
-                    jd.TransactionCode =new JobTransactionCode(JobDetail.TransactionSource.Inventory, "ST");
-                    jd.Status = JobCard.JobStatus.Active;
-                    jd.InventoryItem = new InventoryItem(item.ITEMID);
-                    jd.Warehouse = new Warehouse(WarehouseId);
-                    jd.Quantity = 1;
-                    jd.UnitSellingPrice =Convert.ToDouble(item.TOTALVALUE);
-                    jc.Detail.Add(jd);
-                }
-
-                jc.Save();
-
-                //return jc.ID;
-                //return dbresult;
-                return jc.ID;
-
-            }
-            catch (Exception ex)
-            {
-                return  0;
-            }
-
-
-        }
+         
         #endregion
     }
 }
